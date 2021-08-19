@@ -24,7 +24,7 @@ repositories {
 }
 
 
-val kotestVersion = "4.1.2"
+val kotestVersion = "4.6.1"
 val mockkVersion = "1.10.0"
 val mockServerVersion = "5.11.1"
 val queryDSLVersion = "4.4.0"
@@ -39,6 +39,8 @@ dependencies {
     runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
     annotationProcessor("org.projectlombok:lombok")
     implementation("org.springframework.boot:spring-boot-starter-web")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+
 
 
     //swagger 추가.
@@ -46,13 +48,13 @@ dependencies {
     implementation("io.springfox:springfox-swagger-ui:2.9.2")
 
     //kotest
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.kotest:kotest-runner-junit5-jvm:$kotestVersion")
     testImplementation("io.kotest:kotest-assertions-core-jvm:$kotestVersion")
     testImplementation("io.kotest:kotest-property-jvm:$kotestVersion")
-    testImplementation("io.kotest:kotest-extensions-spring:$kotestVersion")
+    implementation("io.kotest:kotest-extensions-spring:4.4.3")
     testImplementation("io.mockk:mockk:$mockkVersion")
-    testImplementation("org.mock-server:mockserver-netty:$mockServerVersion")
+    testRuntimeOnly("com.h2database:h2")
+
 
     //querydsl
     implementation("com.querydsl:querydsl-jpa:$queryDSLVersion") // 2
@@ -79,4 +81,11 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+    testLogging {
+        events = setOf(
+            org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED,
+            org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED,
+            org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
+        )
+    }
 }
