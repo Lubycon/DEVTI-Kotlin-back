@@ -29,7 +29,7 @@ class AdvertisementController(private val advertisementService: AdvertisementSer
             dataType = "AdvertisementType",
             paramType = "query")
     )
-    fun getAdvertisementAdvertisementType(
+    fun getAdvertisementByAdvertisementType(
         @RequestParam(defaultValue = "ALL") advertisementType: AdvertisementType
     )
     : ResponseEntity<List<AdvertisementResDto>> {
