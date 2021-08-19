@@ -5,9 +5,12 @@ import com.querydsl.core.types.dsl.BooleanExpression
 import com.querydsl.jpa.impl.JPAQueryFactory
 import com.lubycon.devti.domain.advertisement.entity.Advertisement
 import com.lubycon.devti.domain.advertisement.entity.QAdvertisement
+import mu.KotlinLogging
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 import java.time.LocalDate
 import javax.annotation.Resource
+
+
 
 class AdvertisementRepositorySupportImpl(
     @Resource(name = "jpaQueryFactory")

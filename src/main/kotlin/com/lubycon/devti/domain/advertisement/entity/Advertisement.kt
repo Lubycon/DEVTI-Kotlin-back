@@ -13,26 +13,26 @@ class Advertisement (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "advertisement_id")
-    private var id: Long = 0,
+    val id: Long = 0,
 
     @Column(name = "advertiser")
-    private var advertiser: String,
+    val advertiser: String,
 
     @Column(name = "title")
-    private var title: String,
+    val title: String,
 
     @Column(name = "imageUrl")
-    private var imageUrl: String,
+    val imageUrl: String,
 
     @Column(name = "advertisement_start_date")
-    private var advertisementStartDate: LocalDate,
+    val advertisementStartDate: LocalDate,
 
     @Column(name = "advertisement_end_date")
-    private var advertisementEndDate: LocalDate,
+    val advertisementEndDate: LocalDate,
 
     @Enumerated(EnumType.STRING)
     @Column(name = "advertisement_type", insertable = false, updatable = false)
-    private var advertisementType: AdvertisementType
+    val advertisementType: AdvertisementType
 
 ): BaseTimeEntity() {
 
