@@ -6,6 +6,7 @@ plugins {
     kotlin("jvm") version "1.5.21"
     kotlin("plugin.spring") version "1.5.21"
     kotlin("plugin.jpa") version "1.5.21"
+    kotlin("kapt") version "1.4.10"
 }
 
 group = "com.lubycon"
@@ -51,6 +52,18 @@ dependencies {
     testImplementation("io.kotest:kotest-extensions-spring:$kotestVersion")
     testImplementation("io.mockk:mockk:$mockkVersion")
     testImplementation("org.mock-server:mockserver-netty:$mockServerVersion")
+
+    //querydsl
+    implementation("com.querydsl:querydsl-jpa:4.2.1")
+    kapt("com.querydsl:querydsl-apt:4.2.2:jpa")
+    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+    annotationProcessor(group = "com.querydsl", name = "querydsl-apt", classifier = "jpa")
+
+
+}
+
+sourceSets["main"].withConvention(org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet::class){
+    kotlin.srcDir("$buildDir/generated/source/kapt/main")
 }
 
 tasks.withType<KotlinCompile> {
