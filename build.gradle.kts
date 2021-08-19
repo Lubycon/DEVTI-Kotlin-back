@@ -36,6 +36,8 @@ dependencies {
     runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     annotationProcessor("org.projectlombok:lombok")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+
 
     //swagger 추가.
     implementation("io.springfox:springfox-swagger2:2.9.2")
