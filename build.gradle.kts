@@ -6,7 +6,7 @@ plugins {
     kotlin("jvm") version "1.5.21"
     kotlin("plugin.spring") version "1.5.21"
     kotlin("plugin.jpa") version "1.5.21"
-    kotlin("kapt") version "1.4.10"
+    kotlin("kapt") version "1.5.21"
 }
 
 group = "com.lubycon"
@@ -27,6 +27,8 @@ repositories {
 val kotestVersion = "4.1.2"
 val mockkVersion = "1.10.0"
 val mockServerVersion = "5.11.1"
+val queryDSLVersion = "4.4.0"
+
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
@@ -53,15 +55,18 @@ dependencies {
     testImplementation("org.mock-server:mockserver-netty:$mockServerVersion")
 
     //querydsl
-    implementation("com.querydsl:querydsl-jpa:4.2.1")
-    kapt("com.querydsl:querydsl-apt:4.2.2:jpa")
-    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
-    annotationProcessor(group = "com.querydsl", name = "querydsl-apt", classifier = "jpa")
+    implementation("com.querydsl:querydsl-jpa:$queryDSLVersion") // 2
+    kapt("com.querydsl:querydsl-apt:$queryDSLVersion:jpa") // 1
+    kapt("org.springframework.boot:spring-boot-configuration-processor") // 1
+
+    //log
+    implementation("io.github.microutils:kotlin-logging:2.0.10")
+
 
 
 }
 
-sourceSets["main"].withConvention(org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet::class){
+sourceSets["main"].withConvention(org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet::class) {
     kotlin.srcDir("$buildDir/generated/source/kapt/main")
 }
 
