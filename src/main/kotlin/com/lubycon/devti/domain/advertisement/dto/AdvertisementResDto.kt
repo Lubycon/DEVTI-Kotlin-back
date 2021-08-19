@@ -14,17 +14,4 @@ data class AdvertisementResDto(
     var advertisementEndDate: LocalDate,
     var advertisementType: AdvertisementType
 
-){
-    fun convertResponseDto(advertisement: Advertisement): AdvertisementResDto {
-        return AdvertisementResDto(
-            id = advertisement.id,
-            advertiser = advertisement.advertiser,
-            title = advertisement.title,
-            imageUrl = advertisement.imageUrl,
-            advertisementStartDate = advertisement.advertisementStartDate,
-            advertisementEndDate = advertisement.advertisementEndDate,
-            advertisementType = advertisement.advertisementType
-        )
-
-    }
-}
+)
