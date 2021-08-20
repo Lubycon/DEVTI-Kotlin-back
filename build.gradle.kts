@@ -40,7 +40,13 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok")
     implementation("org.springframework.boot:spring-boot-starter-web")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    implementation("org.springframework.boot:spring-boot-starter-validation:2.5.4")
 
+    //no-arg
+    implementation("org.jetbrains.kotlin:kotlin-noarg:1.5.21")
+
+    //all-open
+    implementation("org.jetbrains.kotlin:kotlin-allopen:1.5.21")
 
 
     //swagger 추가.
@@ -88,4 +94,15 @@ tasks.withType<Test> {
             org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
         )
     }
+}
+
+noArg {
+    annotation("javax.persistence.Entity")
+    annotation("javax.persistence.MappedSuperclass")
+    annotation("javax.persistence.Embeddable")}
+
+allOpen {
+    annotation("javax.persistence.Entity")
+    annotation("javax.persistence.MappedSuperclass")
+    annotation("javax.persistence.Embeddable")
 }
