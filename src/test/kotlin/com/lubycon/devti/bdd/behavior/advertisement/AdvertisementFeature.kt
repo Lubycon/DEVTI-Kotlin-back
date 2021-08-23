@@ -1,5 +1,6 @@
 package com.lubycon.devti.bdd.behavior.advertisement
 
+import com.lubycon.devti.SpringDataConfig
 import com.lubycon.devti.domain.advertisement.api.AdvertisementController
 import com.lubycon.devti.domain.advertisement.dao.AdvertisementRepository
 import com.lubycon.devti.domain.advertisement.dto.AdvertisementResDto
@@ -11,18 +12,18 @@ import io.kotest.matchers.date.shouldBeAfter
 import io.kotest.matchers.date.shouldBeBefore
 import io.kotest.matchers.shouldBe
 import io.mockk.mockk
+import io.mockk.spyk
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.test.context.ContextConfiguration
 import java.time.LocalDate
 import javax.transaction.Transactional
 
-@SpringBootTest
-@Transactional
+@ContextConfiguration(classes = [SpringDataConfig::class])
 class AdvertisementFeature(
-    private val advertisementRepository: AdvertisementRepository,
-    private val advertisementService: AdvertisementService
+    _advertisementRepository: AdvertisementRepository,
 ) : BehaviorSpec() {
-
-
+    private val advertisementRepository = spyk(_advertisementRepository)
+    private val advertisementService = AdvertisementService(advertisementRepository)
     override fun isolationMode(): IsolationMode = IsolationMode.InstancePerLeaf
 
 
