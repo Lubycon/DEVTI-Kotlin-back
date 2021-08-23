@@ -23,6 +23,7 @@ class SurveyFeature(
     private val surveyRepository = spyk(_surveyRepository)
     private val surveyService = SurveyService(surveyRepository)
 
+
     init{
         Given("사전신청 하기") {
             When("사용자로부터 입력받았을 때") {
