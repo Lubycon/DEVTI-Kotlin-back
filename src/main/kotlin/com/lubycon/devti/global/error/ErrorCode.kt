@@ -1,5 +1,7 @@
 package com.lubycon.devti.global.error
 
+import com.fasterxml.jackson.annotation.JsonFormat
+
 enum class ErrorCode(
      val status: Int,
      val code: String,
