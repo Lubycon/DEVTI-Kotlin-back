@@ -2,6 +2,7 @@ package com.lubycon.devti.domain.traffic.entity
 
 import com.lubycon.devti.global.code.TestType
 import com.lubycon.devti.global.entity.BaseTimeEntity
+import lombok.Getter
 import javax.persistence.*
 
 @Entity
@@ -14,6 +15,6 @@ class Traffic(
 
     @Enumerated(EnumType.STRING)
     @Column(name = "test_type")
-    private val testType: TestType
+    val testType: TestType
 
 ): BaseTimeEntity()
