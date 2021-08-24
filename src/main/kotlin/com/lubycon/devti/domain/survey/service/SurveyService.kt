@@ -11,7 +11,6 @@ import mu.KotlinLogging
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
-val logger = KotlinLogging.logger {  }
 
 @Service
 class SurveyService(
@@ -24,8 +23,6 @@ class SurveyService(
 
     @Transactional
     fun createSurvey(surveyPostReqDto: SurveyPostReqDto): SurveyPostResDto {
-        logger.info { "service start" }
-
         if (isFilledWithPhoneSurvey(surveyPostReqDto)) {
             checkDuplicatedSurveyByPhone(surveyPostReqDto.phone!!)
         } else {
@@ -40,18 +37,14 @@ class SurveyService(
             testType = surveyPostReqDto.testType
         )
 
-        logger.info { "${survey} " }
 
         return surveyRepository.save(survey).toResDto()
     }
 
-    fun isFilledWithPhoneSurvey(surveyPostReqDto: SurveyPostReqDto): Boolean {
-        return surveyPostReqDto.phone != null
-    }
+    fun isFilledWithPhoneSurvey(surveyPostReqDto: SurveyPostReqDto) = (surveyPostReqDto.phone != null)
 
     fun checkDuplicatedSurveyByPhone(phone: String) {
         if (surveyRepository.findByPhone(phone) != null) {
-            logger.info{ " error exception !!!"}
             throw InvalidValueException(ErrorCode.PHONE_DUPLICATION)
         }
     }
