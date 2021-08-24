@@ -14,13 +14,13 @@ class BucketTestType(
 
     @Enumerated(EnumType.STRING)
     @Column(name = "test_type")
-    private val testType: TestType,
+    val testType: TestType,
 
     @Column(name = "description")
     private val description: String ?= null,
 
     @Column(name = "phrases")
-    private val phrases: String
+    val phrases: String
 
 ): BaseTimeEntity() {
 }
