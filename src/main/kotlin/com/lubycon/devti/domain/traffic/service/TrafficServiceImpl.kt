@@ -8,9 +8,11 @@ import org.springframework.stereotype.Service
 @Service
 class TrafficServiceImpl(
     private val trafficRepository: TrafficRepository
-): TrafficService {
+) : TrafficService {
     override fun getLastTraffic(): Traffic {
-        return (trafficRepository.findTopByOrderByIdDesc() ?: Traffic(testType = TestType.TYPE_COMMON_1)) as Traffic
+        return trafficRepository
+            .findTopByOrderByIdDesc()
+            .orElse(Traffic(testType = TestType.TYPE_COMMON_1))
 
     }
 
