@@ -1,6 +1,7 @@
 package com.lubycon.devti.domain.preset.entity
 
 import com.fasterxml.jackson.annotation.JsonBackReference
+import com.lubycon.devti.domain.question.entity.Question
 import com.lubycon.devti.global.code.BiasType
 import com.lubycon.devti.global.entity.BaseTimeEntity
 import javax.persistence.*
