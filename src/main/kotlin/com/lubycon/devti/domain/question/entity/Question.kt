@@ -15,7 +15,6 @@ class Question(
     @Column(name = "QUESTION_ID")
     private val id: Long = 0,
 
-
     @Column(name = "title", length = 100)
     private var title: String,
 
