@@ -8,9 +8,9 @@ import javax.validation.constraints.NotNull
 data class EventLogPostReqDto(
 
     @ApiModelProperty(value = "event type", example = "CLICK_CTA_BUTTON")
-    private val eventType: EventType,
+    val eventType: EventType,
 
     @ApiModelProperty(value = "Bucket test type", example = "TYPE_COMMON_1")
-    private val testType: TestType
+    val testType: TestType
 
 )
