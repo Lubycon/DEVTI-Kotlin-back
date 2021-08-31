@@ -13,21 +13,21 @@ class Question(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "QUESTION_ID")
-    private val id: Long = 0,
+    val id: Long = 0,
 
     @Column(name = "title", length = 100)
-    private var title: String,
+    val title: String,
 
     @Enumerated(EnumType.STRING)
     @Column(name = "pillar")
-    private val pillar: Pillar,
+    val pillar: Pillar,
 
     @Enumerated(EnumType.STRING)
     @Column(name = "answer_type")
-    private val answerType: AnswerType,
+    val answerType: AnswerType,
 
     @JsonManagedReference
     @OneToMany(mappedBy = "label", cascade = [CascadeType.ALL], orphanRemoval = true)
-    private val labels: Set<Preset> = HashSet<Preset>()
+    val labels: Set<Preset> = HashSet<Preset>()
 
 ): BaseTimeEntity()
