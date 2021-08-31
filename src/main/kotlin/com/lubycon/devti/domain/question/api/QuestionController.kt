@@ -20,6 +20,5 @@ class QuestionController(
 
     @GetMapping(value = ["/all"])
     @ApiOperation(value = "모든 질문 및 선택 가져오기")
-    fun getAllQuestionAndPreset(): ResponseEntity<List<QuestionListResDto>>
-        = ResponseEntity.ok(questionService.findAllQuestionAndPreset())
+    fun getAllQuestionAndPreset() = ResponseEntity.ok(questionService.findAllQuestionAndPreset())
 }
