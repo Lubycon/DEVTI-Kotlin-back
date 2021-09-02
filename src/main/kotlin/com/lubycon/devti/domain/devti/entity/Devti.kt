@@ -2,6 +2,7 @@ package com.lubycon.devti.domain.devti.entity
 
 import com.fasterxml.jackson.annotation.JsonBackReference
 import com.lubycon.devti.domain.answer.entity.Answer
+import com.lubycon.devti.global.entity.BaseTimeEntity
 import javax.persistence.*
 
 
@@ -23,4 +24,4 @@ class Devti(
 
     @Column(name = "devti_result")
     private val devtiResult: String
-)
+): BaseTimeEntity()
