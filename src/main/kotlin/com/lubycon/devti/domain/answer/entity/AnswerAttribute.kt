@@ -7,6 +7,7 @@ import javax.validation.constraints.Min
 class AnswerAttribute(
     val id: Long,
     val answerType: AnswerType,
+    val sequence: Long,
     val bias: BiasType,
     @Min(0)
     val weight: Float
