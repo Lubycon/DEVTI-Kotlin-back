@@ -12,7 +12,7 @@ build/
 .project
 .settings
 .springBeans
-.sts4-cache
+.sts4-cach
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
@@ -35,3 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+
+.DS_Store
