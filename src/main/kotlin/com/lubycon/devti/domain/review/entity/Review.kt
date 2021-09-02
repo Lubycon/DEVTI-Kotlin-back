@@ -8,12 +8,13 @@ class Review(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "survey_id")
+    @Column(name = "review_id")
     private val id: Long,
+
 
     @Lob
     @Column(length = 500)
-    private val headLine: String,
+    val headline: String,
 
     @Lob
     @Column(length = 500)
@@ -26,10 +27,11 @@ class Review(
     private val reviewType: String
 
 ){
-    fun toResDto(review: Review): ReviewResDto {
-        return ReviewResDto(
-            title = title,
-            contents = contents
-        )
+    companion object {
+        fun toResDto(review: Review): ReviewResDto {
+            return review.run {
+                ReviewResDto(title = review.title, contents = review.contents)
+            }
+        }
     }
 }
