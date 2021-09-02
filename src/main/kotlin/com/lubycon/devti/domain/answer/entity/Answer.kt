@@ -4,6 +4,7 @@ import com.lubycon.devti.domain.answer.util.AnswerAttributeConverter
 import com.lubycon.devti.global.entity.BaseTimeEntity
 import javax.persistence.*
 
+@Entity
 class Answer(
 
     @Id
