@@ -1,6 +1,5 @@
 package com.lubycon.devti.domain.question.api
 
-import com.lubycon.devti.domain.question.dto.response.QuestionListResDto
 import com.lubycon.devti.domain.question.service.QuestionService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController
 @RequiredArgsConstructor
 @Api(value = "Question")
 class QuestionController(
-    private final val questionService: QuestionService
+    private val questionService: QuestionService
 ) {
 
     @GetMapping(value = ["/all"])

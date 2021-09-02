@@ -8,20 +8,20 @@ import com.lubycon.devti.global.code.Pillar
 import org.springframework.stereotype.Service
 
 @Service
-class DevtiAnalysiServiceImpl(
-    private final val biasService: BiasService
-) : DevtiAnalysisService {
+class DevtiAnalysiService(
+    private val biasService: BiasService
+) {
 
     companion object {
         const val BIAS_CALIBRATION_VALUE: Float = 0F
         const val PILLAR_TOTAL_WEIGHT: Int = 10
     }
 
-    override fun analysisAnswer(answerAttributeList: List<AnswerAttribute>): HashMap<BiasType, Int> {
-        var weightMap = initBiasWeightMap()
+    fun analysisAnswer(answerAttributeList: List<AnswerAttribute>): HashMap<BiasType, Int> {
+        val weightMap = initBiasWeightMap()
 
-        for(answer: AnswerAttribute in answerAttributeList) {
-            if(!Pillar.REFERENCE.biasList.contains(answer.bias)) {
+        for (answer: AnswerAttribute in answerAttributeList) {
+            if (!Pillar.REFERENCE.biasList.contains(answer.bias)) {
                 val newWeight: Float = weightMap.get(answer.bias)!!.plus(answer.weight)
                 weightMap.replace(answer.bias, newWeight)
             }
@@ -30,20 +30,21 @@ class DevtiAnalysiServiceImpl(
         return convertWeightToPercent(weightMap)
     }
 
-    override fun initBiasWeightMap(): HashMap<BiasType, Float> {
+    fun initBiasWeightMap(): HashMap<BiasType, Float> {
 
-        val biasList: List<Bias> = biasService.findBiasListByBiasIsNotIn(Pillar.REFERENCE.biasList);
+        val biasList: List<Bias> = biasService.findBiasListByBiasIsNotIn(Pillar.REFERENCE.biasList)
 
-        var weightMap: HashMap<BiasType, Float> = HashMap(biasList.size)
+        val weightMap: HashMap<BiasType, Float> = HashMap(biasList.size)
 
-        for(bias: Bias in biasList) {
+        for (bias: Bias in biasList) {
             weightMap.put(bias.bias, BIAS_CALIBRATION_VALUE)
         }
 
-        return weightMap    }
+        return weightMap
+    }
 
-    override fun convertWeightToPercent(weightMap: HashMap<BiasType, Float>): HashMap<BiasType, Int> {
-        var result: HashMap<BiasType, Int> = HashMap()
+    fun convertWeightToPercent(weightMap: HashMap<BiasType, Float>): HashMap<BiasType, Int> {
+        val result: HashMap<BiasType, Int> = HashMap()
         for (biasWeight: Map.Entry<BiasType, Float> in weightMap.entries) {
             result.put(biasWeight.key, Math.round(biasWeight.value / PILLAR_TOTAL_WEIGHT * 100))
         }
@@ -51,9 +52,9 @@ class DevtiAnalysiServiceImpl(
         return result
     }
 
-    override fun classifyDevtiByPillar(biasResult: HashMap<BiasType, Int>): HashMap<BiasType, Int> {
+    fun classifyDevtiByPillar(biasResult: HashMap<BiasType, Int>): HashMap<BiasType, Int> {
 
-        var resultMap: HashMap<BiasType, Int> = LinkedHashMap()
+        val resultMap: HashMap<BiasType, Int> = LinkedHashMap()
 
         for (pillar: Pillar in Pillar.values()) {
 

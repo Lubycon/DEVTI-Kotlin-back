@@ -1,9 +1,14 @@
 package com.lubycon.devti.domain.review.service
 
+import com.lubycon.devti.domain.review.dao.ReviewRepository
 import com.lubycon.devti.domain.review.entity.Review
-import org.springframework.stereotype.Component
+import org.springframework.stereotype.Service
 
-@Component
-interface ReviewService {
-    fun findByReviewType(reviewType: String): Review
+@Service
+class ReviewService(
+    private val reviewRepository: ReviewRepository
+) {
+
+    fun findByReviewType(reviewType: String) = reviewRepository.findReviewByReviewType(reviewType)
+
 }

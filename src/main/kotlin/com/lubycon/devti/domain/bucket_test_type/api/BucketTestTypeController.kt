@@ -1,6 +1,5 @@
 package com.lubycon.devti.domain.bucket_test_type.api
 
-import com.lubycon.devti.domain.bucket_test_type.dto.response.BucketTestTypeGetResDto
 import com.lubycon.devti.domain.bucket_test_type.service.BucketTestTypeService
 import com.lubycon.devti.global.code.EntryPoint
 import io.swagger.annotations.Api

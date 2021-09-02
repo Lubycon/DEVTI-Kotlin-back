@@ -7,7 +7,6 @@ import com.lubycon.devti.domain.event_log.service.EventLogService
 import com.lubycon.devti.global.code.EventType
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
-import lombok.RequiredArgsConstructor
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
