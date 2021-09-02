@@ -7,7 +7,6 @@ import com.lubycon.devti.domain.devti.service.DevtiService
 import com.lubycon.devti.global.code.BiasType
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
-import lombok.RequiredArgsConstructor
 import lombok.extern.slf4j.Slf4j
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
