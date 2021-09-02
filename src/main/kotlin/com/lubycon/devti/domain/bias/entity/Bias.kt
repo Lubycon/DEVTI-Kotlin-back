@@ -17,7 +17,7 @@ class Bias(
 
     @Enumerated(EnumType.STRING)
     @Column(name = "bias")
-    private val bias: BiasType,
+    val bias: BiasType,
 
     @Column(name = "kr_bias")
     private val krBias: String,
