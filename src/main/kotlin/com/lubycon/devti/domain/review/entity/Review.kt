@@ -11,9 +11,11 @@ class Review(
     @Column(name = "review_id")
     private val id: Long,
 
+    @Column(name = "review_type")
+    private val reviewType: String,
 
     @Lob
-    @Column(length = 500)
+    @Column(name = "headline" ,length = 500)
     val headline: String,
 
     @Lob
@@ -22,9 +24,7 @@ class Review(
 
     @Lob
     @Column(length = 500)
-    private val contents: String,
-
-    private val reviewType: String
+    private val contents: String
 
 ){
     companion object {
