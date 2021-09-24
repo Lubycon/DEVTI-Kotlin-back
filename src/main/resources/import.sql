@@ -38,48 +38,45 @@ INSERT INTO bias(pillar, bias, en_bias, kr_bias) VALUES
 
 
 INSERT INTO question (created_at, updated_at, pillar, title, answer_type) VALUES
-(now(), now(), 'ROLE', 'Visualization vs Architecture', 'PRESET'),
-(now(), now(), 'ROLE', 'Visualization vs Architecture', 'PRESET'),
-(now(), now(), 'ROLE', 'Visualization vs Architecture', 'PRESET'),
-(now(), now(), 'ROLE', 'Visualization vs Architecture', 'PRESET'),
-(now(), now(), 'ROLE', 'Visualization vs Architecture', 'PRESET'),
-(now(), now(), 'SCALE', 'Startup vs Corporation', 'PRESET'),
-(now(), now(), 'SCALE', 'Startup vs Corporation', 'PRESET'),
-(now(), now(), 'SCALE', 'Startup vs Corporation', 'PRESET'),
-(now(), now(), 'SCALE', 'Startup vs Corporation', 'PRESET'),
-(now(), now(), 'SCALE', 'Startup vs Corporation', 'PRESET'),
-(now(), now(), 'INTEREST', 'Product vs Technology', 'PRESET'),
-(now(), now(), 'INTEREST', 'Product vs Technology', 'PRESET'),
-(now(), now(), 'INTEREST', 'Product vs Technology', 'PRESET'),
-(now(), now(), 'INTEREST', 'Product vs Technology', 'PRESET'),
-(now(), now(), 'INTEREST', 'Product vs Technology', 'PRESET'),
-(now(), now(), 'PRIORITY', 'Work vs Life', 'PRESET'),
-(now(), now(), 'PRIORITY', 'Work vs Life', 'PRESET'),
-(now(), now(), 'PRIORITY', 'Work vs Life', 'PRESET'),
-(now(), now(), 'PRIORITY', 'Work vs Life', 'PRESET'),
-(now(), now(), 'PRIORITY', 'Work vs Life', 'PRESET'),
-(now(), now(), 'ROLE', 'Visualization vs Architecture', 'GAGE'),
-(now(), now(), 'ROLE', 'Visualization vs Architecture', 'GAGE'),
-(now(), now(), 'ROLE', 'Visualization vs Architecture', 'GAGE'),
-(now(), now(), 'ROLE', 'Visualization vs Architecture', 'GAGE'),
-(now(), now(), 'ROLE', 'Visualization vs Architecture', 'GAGE'),
-(now(), now(), 'SCALE', 'Startup vs Corporation', 'GAGE'),
-(now(), now(), 'SCALE', 'Startup vs Corporation', 'GAGE'),
-(now(), now(), 'SCALE', 'Startup vs Corporation', 'GAGE'),
-(now(), now(), 'SCALE', 'Startup vs Corporation', 'GAGE'),
-(now(), now(), 'SCALE', 'Startup vs Corporation', 'GAGE'),
-(now(), now(), 'INTEREST', 'Product vs Technology', 'GAGE'),
-(now(), now(), 'INTEREST', 'Product vs Technology', 'GAGE'),
-(now(), now(), 'INTEREST', 'Product vs Technology', 'GAGE'),
-(now(), now(), 'INTEREST', 'Product vs Technology', 'GAGE'),
-(now(), now(), 'INTEREST', 'Product vs Technology', 'GAGE'),
-(now(), now(), 'PRIORITY', 'Work vs Life', 'GAGE'),
-(now(), now(), 'PRIORITY', 'Work vs Life', 'GAGE'),
-(now(), now(), 'PRIORITY', 'Work vs Life', 'GAGE'),
-(now(), now(), 'PRIORITY', 'Work vs Life', 'GAGE'),
-(now(), now(), 'PRIORITY', 'Work vs Life', 'GAGE'),
-(now(), now(), 'REFERENCE', '현재 해당 직무에서 근무하신 기간이 어떻게 되나요?', 'INFO'),
-(now(), now(), 'REFERENCE', '향후 희망하는 직무가 무엇이에요?', 'INFO');
+(now(), now(), 'ROLE', '사이드 프로젝트로 앱을 만들기로 결심했다! 내가 가장 먼저 고민하는 것은? ', 'PRESET'),
+(now(), now(), 'ROLE', '조별과제를 할때 나는..', 'PRESET'),
+(now(), now(), 'ROLE', '내가 가장 뿌듯함을 느끼는 순간은..', 'PRESET'),
+(now(), now(), 'ROLE', '건축학과에 입학한 당신, 첫번째 과제로 ''건물설계 모형''을 만들어야 한다.', 'PRESET'),
+(now(), now(), 'ROLE', '선선해진 날씨, 취미로 달리기를 하기 위해 런닝화를 사려고 한다.', 'PRESET'),
+(now(), now(), 'ROLE', '늦은 밤, 내가 만든 웹사이트에 몇 가지 문제가 생긴 걸 발견했다. 어떤 문제를 먼저 고칠까?', 'PRESET'),
+(now(), now(), 'ROLE', '기능은 좋은데 디자인이 맘에 안 들어 앱을 삭제할 때가 종종 있다', 'GAGE'),
+
+(now(), now(), 'SCALE', '들어온 지 반년 정도 된 동아리에서 새로운 팀 프로젝트가 시작됐다.', 'PRESET'),
+(now(), now(), 'SCALE', '나는 동아리의 신입회장. 동아리원들의 활동 비용을 일정 부분 지원해주려고 한다.', 'PRESET'),
+(now(), now(), 'SCALE', '유튜브를 시작할만한 좋은 컨텐츠가 드디어 생각났다! 촬영이나 영상 편집 경험은 한 번도 없는 나는..', 'PRESET'),
+(now(), now(), 'SCALE', '내 앞에 두 개의 버튼이 있다. 어떤 버튼을 누를까?', 'PRESET'),
+(now(), now(), 'SCALE', '드디어 동아리 가입기간이 시작됐다! 어떤 동아리에 들어갈까?', 'PRESET'),
+(now(), now(), 'SCALE', '새로운 OS(운영체제)가 나왔다고 한다. 궁금한데?', 'PRESET'),
+(now(), now(), 'SCALE', '남는 돈이 생겨 주식을 해보려고 한다. 어떤 주식을 살까?', 'PRESET'),
+(now(), now(), 'SCALE', '타 부서의 업무에서 오류가 발견되었다.', 'PRESET'),
+
+
+
+
+(now(), now(), 'INTEREST', '남는 천으로 필통을 만들어보기로 했다. 바느질을 할 때 나는...', 'PRESET'),
+(now(), now(), 'INTEREST', '시간이 부족해 찍은 시험 문제를 맞췄다.', 'PRESET'),
+(now(), now(), 'INTEREST', '이케아에서 산 서랍을 모두 조립했다! 그런데.. 나사가 하나 남네?!', 'PRESET'),
+(now(), now(), 'INTEREST', '나는 이런 팀에서 일하고 싶어!', 'PRESET'),
+(now(), now(), 'INTEREST', '회사 사람들끼리 스터디를 하네. 나도 해볼까?', 'PRESET'),
+(now(), now(), 'INTEREST', '정말 멋진 앱을 발견했을 때 나는..', 'PRESET'),
+(now(), now(), 'INTEREST', '나중에 직업을 고를 수 있다면 나는..', 'PRESET'),
+(now(), now(), 'INTEREST', '나에게 개발(프로그래밍)은 내가 원하는 서비스를 만들기 위한 수단이다.', 'PRESET'),
+
+
+
+(now(), now(), 'PRIORITY', '부캐를 일로 연결시킬 수 있다면 나는..', 'PRESET'),
+(now(), now(), 'PRIORITY', '나는 자아실현을', 'PRESET'),
+(now(), now(), 'PRIORITY', '업무 외 시간이 생겨서 활용해보려고 한다. 무엇을 할까?', 'PRESET'),
+(now(), now(), 'PRIORITY', '업무 외 시간이 생겨서 활용해보려고 한다. 무엇을 할까?', 'PRESET'),
+(now(), now(), 'PRIORITY', '할 수만 있다면 평생 일 하며 살고 싶다. ', 'GAGE'),
+(now(), now(), 'PRIORITY', '업무가 재밌다면 칼퇴하지 않아도 상관없다.', 'GAGE');
+
+
 
 INSERT INTO preset (created_at, updated_at, question_id, sequence, label, bias, weight) VALUES
 (now(), now(), 1, 0, 'VVVVVV', 'V', 1),
