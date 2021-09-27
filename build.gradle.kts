@@ -70,6 +70,9 @@ dependencies {
     //log
     implementation("io.github.microutils:kotlin-logging:2.0.10")
 
+    implementation("com.google.code.gson:gson:2.8.8")
+
+
 
 
 }
