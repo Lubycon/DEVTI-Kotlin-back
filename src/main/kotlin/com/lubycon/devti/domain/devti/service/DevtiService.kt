@@ -42,7 +42,7 @@ class DevtiService(
         val answer = answerService.createAnswer(answerAttributeList)
         val biasResult: HashMap<BiasType, Int> = devtiAnalysisService.analysisAnswer(answerAttributeList)
         val winBiasResult: HashMap<BiasType, Int> = devtiAnalysisService.classifyDevtiByPillar(biasResult)
-        val job: String = if (answerAttributeList.get(40).sequence == 0L) DESIRED_JOB_F else DESIRED_JOB_B
+        val job: String = if (answerAttributeList.get(30).sequence == 0L) DESIRED_JOB_F else DESIRED_JOB_B
         createDevti(answer, winBiasResult, biasResult)
         val devti = DevtiReqDto(job = job, result = biasResult.toString())
 
