@@ -6,7 +6,10 @@ import com.lubycon.devti.domain.bias.service.BiasService
 import com.lubycon.devti.domain.devti.dto.response.PillarWeight
 import com.lubycon.devti.global.code.BiasType
 import com.lubycon.devti.global.code.Pillar
+import mu.KotlinLogging
 import org.springframework.stereotype.Service
+import kotlin.math.log
+
 
 @Service
 class DevtiAnalysiService(
@@ -21,6 +24,7 @@ class DevtiAnalysiService(
     }
 
     fun analysisAnswer(answerAttributeList: List<AnswerAttribute>): HashMap<BiasType, Int> {
+
         val weightMap = initBiasWeightMap()
         val pillarWeight = checkPillarWeight(answerAttributeList)
         for (answer: AnswerAttribute in answerAttributeList) {
@@ -29,6 +33,7 @@ class DevtiAnalysiService(
                 weightMap.replace(answer.bias, newWeight)
             }
         }
+
 
         return convertWeightToPercent(weightMap, pillarWeight)
     }
@@ -62,22 +67,23 @@ class DevtiAnalysiService(
     fun convertWeightToPercent(weightMap: HashMap<BiasType, Float>, pillarWeight: PillarWeight): HashMap<BiasType, Int> {
         val result: HashMap<BiasType, Int> = HashMap()
         for (biasWeight: Map.Entry<BiasType, Float> in weightMap.entries) {
-            if(biasWeight.key.equals(Pillar.ROLE.biasList)) {
+            if(Pillar.ROLE.biasList.contains(biasWeight.key)) {
                 result.put(biasWeight.key, Math.round(biasWeight.value / pillarWeight.roleWeight * 100))
             }
 
-            if(biasWeight.key.equals(Pillar.SCALE.biasList)) {
+            if(Pillar.SCALE.biasList.contains(biasWeight.key)) {
                 result.put(biasWeight.key, Math.round(biasWeight.value / pillarWeight.scaleWeight * 100))
             }
 
-            if(biasWeight.key.equals(Pillar.INTEREST.biasList)) {
+            if(Pillar.INTEREST.biasList.contains(biasWeight.key)) {
                 result.put(biasWeight.key, Math.round(biasWeight.value / pillarWeight.interestWeight * 100))
             }
 
-            else {
+            if(Pillar.PRIORITY.biasList.contains(biasWeight.key)) {
                 result.put(biasWeight.key, Math.round(biasWeight.value / pillarWeight.priorityWeight * 100))
             }
         }
+
 
         return result
     }
