@@ -1,5 +1,6 @@
 package com.lubycon.devti.domain.devti.dto.request
 
+import com.lubycon.devti.global.code.BiasType
 import io.swagger.annotations.ApiModelProperty
 
 data class DevtiReqDto(
@@ -8,6 +9,6 @@ data class DevtiReqDto(
     val job: String,
 
     @ApiModelProperty(value = "DEVTI 결과 HashMap String", example = "{W=90, A=60, P=60, V=35, T=40, S=75, L=0, C=15}")
-    val result: String
+    val result: HashMap<BiasType, Int>
 
 )
