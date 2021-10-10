@@ -76,8 +76,9 @@ INSERT INTO question (created_at, updated_at, pillar, title, answer_type) VALUES
 (now(), now(), 'PRIORITY', '할 수만 있다면 평생 일 하며 살고 싶다. ', 'GAGE'),
 (now(), now(), 'PRIORITY', '업무가 재밌다면 칼퇴하지 않아도 상관없다.', 'GAGE'),
 
-(now(), now(), 'REFERENCE', '현재 해당 직무에서 근무하신 기간이 어떻게 되나요?', 'INFO'),
-(now(), now(), 'REFERENCE', '향후 희망하는 직무가 무엇이에요?', 'INFO');
+(now(), now(), 'REFERENCE', '향후 희망하는 직무가 무엇이에요?', 'INFO'),
+(now(), now(), 'REFERENCE', '현재 해당 직무에서 근무하신 기간이 어떻게 되나요?', 'INFO');
+
 
 
 
