@@ -1,5 +1,8 @@
 package com.lubycon.devti.domain.devti.service
 
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.google.gson.GsonBuilder
+import com.google.gson.JsonObject
 import com.lubycon.devti.domain.advertisement.service.AdvertisementService
 import com.lubycon.devti.domain.answer.entity.Answer
 import com.lubycon.devti.domain.answer.entity.AnswerAttribute
@@ -18,8 +21,8 @@ import com.lubycon.devti.domain.review.service.ReviewService
 import com.lubycon.devti.global.code.BiasType
 import com.lubycon.devti.global.code.Pillar
 import org.springframework.stereotype.Service
-import java.util.AbstractMap
-import java.util.ArrayList
+import java.util.*
+
 
 @Service
 class DevtiService(
@@ -44,10 +47,10 @@ class DevtiService(
         val winBiasResult: HashMap<BiasType, Int> = devtiAnalysisService.classifyDevtiByPillar(biasResult)
         val job: String = if (answerAttributeList.get(30).sequence == 0L) DESIRED_JOB_F else DESIRED_JOB_B
         createDevti(answer, winBiasResult, biasResult)
-        val devti = DevtiReqDto(job = job, result = biasResult.toString())
-
+        val devti = DevtiReqDto(job = job, result = biasResult)
         return devti
     }
+
 
     fun getDevtiByAnswer(biasResult: HashMap<BiasType, Int>, job: String): DevtiResDto {
         val winBiasResult: HashMap<BiasType, Int> = devtiAnalysisService.classifyDevtiByPillar(biasResult)
