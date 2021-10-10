@@ -18,48 +18,48 @@ object MockAnswer {
     open fun role_preset_answer(i: Long) = AnswerAttribute (
         id = i,
         answerType = AnswerType.PRESET,
-        sequence = Arb.long(0L,1L).single(),
-        bias = Arb.element(Pillar.ROLE.biasList).single(),
+        sequence = 0L,
+        bias = BiasType.V,
         weight = 1F
     )
 
     open fun role_gage_answer(i: Long) = AnswerAttribute (
         id = i,
         answerType = AnswerType.GAGE,
-        sequence = Arb.long(0L,1L).single(),
-        bias =  Arb.element(Pillar.ROLE.biasList).single(),
+        sequence = 0L,
+        bias =  BiasType.V,
         weight = 1F
     )
 
     open fun scale_preset_answer(i: Long) = AnswerAttribute (
         id = i,
         answerType = AnswerType.PRESET,
-        sequence = Arb.long(0L,1L).single(),
-        bias =  Arb.element(Pillar.SCALE.biasList).single(),
+        sequence = 0L,
+        bias =  BiasType.S,
         weight = 1F
     )
 
     open fun scale_gage_answer(i: Long) = AnswerAttribute (
         id = i,
         answerType = AnswerType.GAGE,
-        sequence = Arb.long(0L,1L).single(),
-        bias =  Arb.element(Pillar.SCALE.biasList).single(),
+        sequence = 0L,
+        bias =  BiasType.S,
         weight = 1F
     )
 
     open fun interest_preset_answer(i: Long) = AnswerAttribute (
         id = i,
         answerType = AnswerType.PRESET,
-        sequence = Arb.long(0L,1L).single(),
-        bias =  Arb.element(Pillar.INTEREST.biasList).single(),
+        sequence = 0L,
+        bias =  BiasType.P,
         weight = 1F
     )
 
     open fun interest_gage_answer(i: Long) = AnswerAttribute (
         id = i,
         answerType = AnswerType.GAGE,
-        sequence = Arb.long(0L,1L).single(),
-        bias =  Arb.element(Pillar.INTEREST.biasList).single(),
+        sequence = 0L,
+        bias =  BiasType.P,
         weight = 1F
     )
 
@@ -67,32 +67,35 @@ object MockAnswer {
         id = i,
         answerType = AnswerType.PRESET,
         sequence = Arb.long(0L,1L).single(),
-        bias =  Arb.element(Pillar.PRIORITY.biasList).single(),
+        bias =  BiasType.W,
         weight = 1F
     )
 
     open fun priority_gage_answer(i: Long) = AnswerAttribute (
         id = i,
         answerType = AnswerType.GAGE,
-        sequence = Arb.long(0L,1L).single(),
-        bias =  Arb.element(Pillar.PRIORITY.biasList).single(),
+        sequence = 0L,
+        bias = BiasType.W,
         weight = 1F
     )
 
-    fun front_back(i:Long) = AnswerAttribute (
-        id = i,
+    fun job(
+
+    ) = AnswerAttribute(
+        id = 30,
         answerType = AnswerType.INFO,
-        sequence = Arb.long(0L,1L).single(),
+        sequence = 0L,
         bias =  BiasType.J,
         weight = 0F
     )
 
-    fun career(i: Long) = AnswerAttribute(
-        id = i,
+    fun career() = AnswerAttribute(
+        id = 31,
         answerType = AnswerType.INFO,
-        sequence = Arb.long(0L,2L).single(),
+        sequence = 0L,
         bias =  BiasType.Y,
         weight = 0F
+
     )
 
 
