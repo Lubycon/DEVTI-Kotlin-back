@@ -79,6 +79,8 @@ class DevtiServiceTest(
     init {
 
         test("analysisAnswer") {
+
+            //given
             val string = Gson().toJson(answerList)
             print(string)
             result = devtiAnalysiService.analysisAnswer(answerList)
