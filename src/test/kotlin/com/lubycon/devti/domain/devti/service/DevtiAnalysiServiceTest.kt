@@ -16,29 +16,50 @@ class DevtiAnalysiServiceTest(val devtiAnalysiService: DevtiAnalysiService) : Fu
 
     private val answerList = mutableListOf<AnswerAttribute>()
     private var result = HashMap<BiasType, Int>()
+
     private val mockAnswer = MockAnswer
 
 
     override fun beforeTest(testCase: TestCase) {
         print("run before Test")
-        for (i in 1..5) {
+        for (i in 1..6) {
             answerList.add(mockAnswer.role_preset_answer(i.toLong()))
         }
-        for (i in 6..10) {
+        answerList.add(mockAnswer.role_gage_answer(7))
+
+        for (i in 8..15) {
             answerList.add(mockAnswer.scale_preset_answer(i.toLong()))
         }
-        for (i in 11..15) {
+        for (i in 16..23) {
             answerList.add(mockAnswer.interest_preset_answer(i.toLong()))
         }
-        for (i in 16..20) {
+        for (i in 24..27) {
             answerList.add(mockAnswer.priority_preset_answer(i.toLong()))
         }
+
+        for(i in 28..29) {
+            answerList.add(mockAnswer.priority_gage_answer(i.toLong()))
+        }
+
+
+
+        print("m")
     }
 
     init {
+
         test("analysisAnswer") {
             result = devtiAnalysiService.analysisAnswer(answerList)
             print(result.toString())
+        }
+
+        test("initBiasWeightMap") {
+            val weightMap = devtiAnalysiService.initBiasWeightMap();
+            print(weightMap.toString())
+        }
+        test("checkPillarWeight") {
+            val tmp = devtiAnalysiService.checkPillarWeight(answerList)
+            print(tmp.toString())
         }
     }
 

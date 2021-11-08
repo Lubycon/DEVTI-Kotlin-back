@@ -3,14 +3,20 @@ package com.lubycon.devti.domain.devti.service
 import com.lubycon.devti.domain.answer.entity.AnswerAttribute
 import com.lubycon.devti.domain.bias.entity.Bias
 import com.lubycon.devti.domain.bias.service.BiasService
+import com.lubycon.devti.domain.devti.dto.response.PillarWeight
 import com.lubycon.devti.global.code.BiasType
 import com.lubycon.devti.global.code.Pillar
+import mu.KotlinLogging
 import org.springframework.stereotype.Service
+import kotlin.math.log
+
 
 @Service
 class DevtiAnalysiService(
     private val biasService: BiasService
 ) {
+
+
 
     companion object {
         const val BIAS_CALIBRATION_VALUE: Float = 0F
@@ -18,8 +24,9 @@ class DevtiAnalysiService(
     }
 
     fun analysisAnswer(answerAttributeList: List<AnswerAttribute>): HashMap<BiasType, Int> {
-        val weightMap = initBiasWeightMap()
 
+        val weightMap = initBiasWeightMap()
+        val pillarWeight = checkPillarWeight(answerAttributeList)
         for (answer: AnswerAttribute in answerAttributeList) {
             if (!Pillar.REFERENCE.biasList.contains(answer.bias)) {
                 val newWeight: Float = weightMap.get(answer.bias)!!.plus(answer.weight)
@@ -27,7 +34,21 @@ class DevtiAnalysiService(
             }
         }
 
-        return convertWeightToPercent(weightMap)
+
+        return convertWeightToPercent(weightMap, pillarWeight)
+    }
+
+
+    fun checkPillarWeight(answerAttributeList: List<AnswerAttribute>): PillarWeight {
+        val pillarData = answerAttributeList.groupingBy { it.bias  }.eachCount()
+
+        val roleWeight = (pillarData.get(BiasType.V)?:0) + (pillarData.get(BiasType.A)?: 0)
+        val scaleWeight = (pillarData.get(BiasType.S)?:0) + (pillarData.get(BiasType.C)?: 0)
+        val interestWeight = (pillarData.get(BiasType.P)?:0) + (pillarData.get(BiasType.T)?: 0)
+        val priorityWeight = (pillarData.get(BiasType.W)?:0) + (pillarData.get(BiasType.L)?: 0)
+
+        return PillarWeight(roleWeight,scaleWeight,interestWeight,priorityWeight)
+
     }
 
     fun initBiasWeightMap(): HashMap<BiasType, Float> {
@@ -43,11 +64,26 @@ class DevtiAnalysiService(
         return weightMap
     }
 
-    fun convertWeightToPercent(weightMap: HashMap<BiasType, Float>): HashMap<BiasType, Int> {
+    fun convertWeightToPercent(weightMap: HashMap<BiasType, Float>, pillarWeight: PillarWeight): HashMap<BiasType, Int> {
         val result: HashMap<BiasType, Int> = HashMap()
         for (biasWeight: Map.Entry<BiasType, Float> in weightMap.entries) {
-            result.put(biasWeight.key, Math.round(biasWeight.value / PILLAR_TOTAL_WEIGHT * 100))
+            if(Pillar.ROLE.biasList.contains(biasWeight.key)) {
+                result.put(biasWeight.key, Math.round(biasWeight.value / pillarWeight.roleWeight * 100))
+            }
+
+            if(Pillar.SCALE.biasList.contains(biasWeight.key)) {
+                result.put(biasWeight.key, Math.round(biasWeight.value / pillarWeight.scaleWeight * 100))
+            }
+
+            if(Pillar.INTEREST.biasList.contains(biasWeight.key)) {
+                result.put(biasWeight.key, Math.round(biasWeight.value / pillarWeight.interestWeight * 100))
+            }
+
+            if(Pillar.PRIORITY.biasList.contains(biasWeight.key)) {
+                result.put(biasWeight.key, Math.round(biasWeight.value / pillarWeight.priorityWeight * 100))
+            }
         }
+
 
         return result
     }

@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/question")
+@RequestMapping("/questions")
 @RequiredArgsConstructor
 @Api(value = "Question")
 class QuestionController(
     private val questionService: QuestionService
 ) {
 
-    @GetMapping(value = ["/all"])
+    @GetMapping
     @ApiOperation(value = "모든 질문 및 선택 가져오기")
     fun getAllQuestionAndPreset() = ResponseEntity.ok(questionService.findAllQuestionAndPreset())
 }

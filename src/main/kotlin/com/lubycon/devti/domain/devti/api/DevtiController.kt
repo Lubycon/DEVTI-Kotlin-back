@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*
 
 @Slf4j
 @RestController
-@RequestMapping("/devti")
+@RequestMapping("/results")
 @Api(value = "Devti")
 class DevtiController(
     private val devtiService: DevtiService
@@ -26,7 +26,7 @@ class DevtiController(
     }
 
 
-    @GetMapping("/result")
+    @GetMapping
     @ApiOperation(value = "결과 요청값으로 결과 반환 받기")
     fun getDevtiByQueryString(
         @RequestParam("V") v: Int,
