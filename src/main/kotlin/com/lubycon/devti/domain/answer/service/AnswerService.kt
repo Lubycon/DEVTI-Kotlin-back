@@ -9,6 +9,6 @@ import org.springframework.stereotype.Service
 class AnswerService(
     private val answerRepository: AnswerRepository
 ) {
-     fun createAnswer(answerAttributList: List<AnswerAttribute>)
-     = answerRepository.save(Answer(answerList = answerAttributList))
+     fun createAnswer(answerAttributeList: List<AnswerAttribute>)
+     = answerRepository.save(Answer(answerList = answerAttributeList))
 }

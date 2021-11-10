@@ -12,9 +12,10 @@ import org.springframework.test.context.ContextConfiguration
 import javax.validation.constraints.Min
 import kotlin.math.sign
 
+
 @ContextConfiguration(classes = [SpringDataConfig::class])
 object MockAnswer {
-
+    //
     open fun role_preset_answer(i: Long) = AnswerAttribute (
         id = i,
         answerType = AnswerType.PRESET,
