@@ -25,8 +25,11 @@ class DevtiAnalysiService(
 
     fun analysisAnswer(answerAttributeList: List<AnswerAttribute>): HashMap<BiasType, Int> {
 
+        //4가지 특성의 필러들로만 이루어진 map
         val weightMap = initBiasWeightMap()
+
         val pillarWeight = checkPillarWeight(answerAttributeList)
+
         for (answer: AnswerAttribute in answerAttributeList) {
             if (!Pillar.REFERENCE.biasList.contains(answer.bias)) {
                 val newWeight: Float = weightMap.get(answer.bias)!!.plus(answer.weight)
@@ -53,8 +56,11 @@ class DevtiAnalysiService(
 
     fun initBiasWeightMap(): HashMap<BiasType, Float> {
 
+        //4가지 특성의 필러들로만 구성 된 리스트
         val biasList: List<Bias> = biasService.findBiasListByBiasIsNotIn(Pillar.REFERENCE.biasList)
 
+
+        //map 을 선언하여 biasType 별로 초기화
         val weightMap: HashMap<BiasType, Float> = HashMap(biasList.size)
 
         for (bias: Bias in biasList) {
@@ -66,6 +72,7 @@ class DevtiAnalysiService(
 
     fun convertWeightToPercent(weightMap: HashMap<BiasType, Float>, pillarWeight: PillarWeight): HashMap<BiasType, Int> {
         val result: HashMap<BiasType, Int> = HashMap()
+
         for (biasWeight: Map.Entry<BiasType, Float> in weightMap.entries) {
             if(Pillar.ROLE.biasList.contains(biasWeight.key)) {
                 result.put(biasWeight.key, Math.round(biasWeight.value / pillarWeight.roleWeight * 100))
