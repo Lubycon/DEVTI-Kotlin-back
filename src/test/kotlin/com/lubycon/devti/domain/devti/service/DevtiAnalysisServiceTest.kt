@@ -5,24 +5,19 @@ import com.lubycon.devti.domain.answer.entity.AnswerAttribute
 import com.lubycon.devti.domain.bias.MockBiasListNotInReference
 import com.lubycon.devti.domain.bias.entity.Bias
 import com.lubycon.devti.domain.bias.service.BiasService
-import com.lubycon.devti.domain.devti.dto.response.PillarWeight
 import com.lubycon.devti.global.code.BiasType
 import com.lubycon.devti.global.code.Pillar
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.core.test.TestCase
-import io.kotest.extensions.spring.SpringExtension
-import io.kotest.extensions.system.OverrideMode.SetOrError.override
-import io.kotest.extensions.system.OverrideMode.SetOrOverride.override
 import io.kotest.matchers.shouldBe
 import io.mockk.every
 import io.mockk.mockk
-import org.springframework.boot.test.context.SpringBootTest
 
 
 class DevtiAnalysisServiceTest : FunSpec() {
 
     private val biasService = mockk<BiasService>()
-    private val devtiAnalysiService = DevtiAnalysiService(biasService)
+    private val devtiAnalysiService = DevtiAnalysisService(biasService)
 
     private val answerList = mutableListOf<AnswerAttribute>()
     private var result = HashMap<BiasType, Int>()

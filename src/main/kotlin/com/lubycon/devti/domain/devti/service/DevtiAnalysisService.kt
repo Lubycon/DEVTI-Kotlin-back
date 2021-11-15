@@ -12,7 +12,7 @@ import kotlin.math.log
 
 
 @Service
-class DevtiAnalysiService(
+class DevtiAnalysisService(
     private val biasService: BiasService
 ) {
 

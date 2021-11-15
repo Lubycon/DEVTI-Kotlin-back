@@ -1,8 +1,5 @@
 package com.lubycon.devti.domain.devti.service
 
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.google.gson.GsonBuilder
-import com.google.gson.JsonObject
 import com.lubycon.devti.domain.advertisement.service.AdvertisementService
 import com.lubycon.devti.domain.answer.entity.Answer
 import com.lubycon.devti.domain.answer.entity.AnswerAttribute
@@ -28,7 +25,7 @@ import java.util.*
 class DevtiService(
     private val answerService: AnswerService,
     private val devtiRepository: DevtiRepository,
-    private val devtiAnalysisService: DevtiAnalysiService,
+    private val devtiAnalysisService: DevtiAnalysisService,
     private val advertisementService: AdvertisementService,
     private val biasService: BiasService,
     private val reviewService: ReviewService

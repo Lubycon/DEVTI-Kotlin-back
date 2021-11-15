@@ -16,7 +16,6 @@ import com.lubycon.devti.global.code.BiasType
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.core.test.TestCase
 import io.kotest.extensions.spring.SpringExtension
-import org.junit.jupiter.api.Assertions.*
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
@@ -30,7 +29,7 @@ class DevtiServiceTest(
 
     private val answerService = AnswerService(answerRepository)
     private val biasService = BiasService(biasRepository)
-    private val devtiAnalysiService = DevtiAnalysiService(biasService)
+    private val devtiAnalysiService = DevtiAnalysisService(biasService)
     private val advertisementService = AdvertisementService(advertisementRepository)
     private val reviewService = ReviewService(reviewRepository)
 

@@ -8,7 +8,7 @@ import com.lubycon.devti.domain.answer.service.AnswerService
 import com.lubycon.devti.domain.bias.dao.BiasRepository
 import com.lubycon.devti.domain.bias.service.BiasService
 import com.lubycon.devti.domain.devti.dao.DevtiRepository
-import com.lubycon.devti.domain.devti.service.DevtiAnalysiService
+import com.lubycon.devti.domain.devti.service.DevtiAnalysisService
 import com.lubycon.devti.domain.devti.service.DevtiService
 import com.lubycon.devti.domain.review.dao.ReviewRepository
 import com.lubycon.devti.domain.review.service.ReviewService
@@ -33,7 +33,7 @@ class DevtiFeature(
 
     private val answerService = AnswerService(answerRepository)
     private val biasService = BiasService(biasRepository)
-    private val devtiAnalysiService = DevtiAnalysiService(biasService)
+    private val devtiAnalysiService = DevtiAnalysisService(biasService)
     private val advertisementService = AdvertisementService(advertisementRepository)
     private val reviewService = ReviewService(reviewRepository)
 
