@@ -21,6 +21,8 @@ class DevtiAnalysisServiceTest : FunSpec() {
 
     private val answerList = mutableListOf<AnswerAttribute>()
     private var result = HashMap<BiasType, Int>()
+    private var biasResult = HashMap<BiasType, Int>()
+
 
     private val mockAnswer = MockAnswer
     private val biasList: List<Bias> = MockBiasListNotInReference.biasList
@@ -87,6 +89,7 @@ class DevtiAnalysisServiceTest : FunSpec() {
 
             //when
             result = devtiAnalysiService.analysisAnswer(answerList)
+            print(result.toString())
 
             //then
             result.get(BiasType.V) shouldBe 100
@@ -97,6 +100,27 @@ class DevtiAnalysisServiceTest : FunSpec() {
             result.get(BiasType.C) shouldBe 0
             result.get(BiasType.W) shouldBe 100
             result.get(BiasType.L) shouldBe 0
+        }
+
+
+        test("classifyDevtiByPillar") {
+            //given
+            biasResult[BiasType.T] = 0
+            biasResult[BiasType.W] = 100
+            biasResult[BiasType.A] = 0
+            biasResult[BiasType.C] = 0
+            biasResult[BiasType.P] = 100
+            biasResult[BiasType.L] = 0
+            biasResult[BiasType.S] = 100
+            biasResult[BiasType.V] = 100
+
+
+            //when
+            val result = devtiAnalysiService.classifyDevtiByPillar(biasResult)
+
+            //then
+            val keys = result.keys
+
         }
 
 
