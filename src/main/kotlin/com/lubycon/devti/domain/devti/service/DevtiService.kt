@@ -1,8 +1,5 @@
 package com.lubycon.devti.domain.devti.service
 
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.google.gson.GsonBuilder
-import com.google.gson.JsonObject
 import com.lubycon.devti.domain.advertisement.service.AdvertisementService
 import com.lubycon.devti.domain.answer.entity.Answer
 import com.lubycon.devti.domain.answer.entity.AnswerAttribute
@@ -22,13 +19,14 @@ import com.lubycon.devti.global.code.BiasType
 import com.lubycon.devti.global.code.Pillar
 import org.springframework.stereotype.Service
 import java.util.*
+import kotlin.collections.LinkedHashMap
 
 
 @Service
 class DevtiService(
     private val answerService: AnswerService,
     private val devtiRepository: DevtiRepository,
-    private val devtiAnalysisService: DevtiAnalysiService,
+    private val devtiAnalysisService: DevtiAnalysisService,
     private val advertisementService: AdvertisementService,
     private val biasService: BiasService,
     private val reviewService: ReviewService
@@ -53,7 +51,7 @@ class DevtiService(
 
 
     fun getDevtiByAnswer(biasResult: HashMap<BiasType, Int>, job: String): DevtiResDto {
-        val winBiasResult: HashMap<BiasType, Int> = devtiAnalysisService.classifyDevtiByPillar(biasResult)
+        val winBiasResult: LinkedHashMap<BiasType, Int> = devtiAnalysisService.classifyDevtiByPillar(biasResult)
         val devtiString = getDevtiString(winBiasResult)
         val reviewTypeMap: MutableMap<BiasType, String> = HashMap()
         val roleReviewType: Map.Entry<BiasType, String> = getRolePillarReviewType(winBiasResult, job)
@@ -105,7 +103,8 @@ class DevtiService(
             devtiString += biasMap.key.toString()
         }
 
-        return devtiString    }
+        return devtiString
+    }
 
     fun getBiasResults(
         devti: String,
@@ -139,7 +138,8 @@ class DevtiService(
             biasReviewResults.add(biasReviewResult)
         }
 
-        return biasReviewResults    }
+        return biasReviewResults
+    }
 
     fun createDevti(
         answer: Answer,

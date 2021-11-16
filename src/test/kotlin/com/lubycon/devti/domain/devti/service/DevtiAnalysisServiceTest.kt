@@ -5,27 +5,24 @@ import com.lubycon.devti.domain.answer.entity.AnswerAttribute
 import com.lubycon.devti.domain.bias.MockBiasListNotInReference
 import com.lubycon.devti.domain.bias.entity.Bias
 import com.lubycon.devti.domain.bias.service.BiasService
-import com.lubycon.devti.domain.devti.dto.response.PillarWeight
 import com.lubycon.devti.global.code.BiasType
 import com.lubycon.devti.global.code.Pillar
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.core.test.TestCase
-import io.kotest.extensions.spring.SpringExtension
-import io.kotest.extensions.system.OverrideMode.SetOrError.override
-import io.kotest.extensions.system.OverrideMode.SetOrOverride.override
 import io.kotest.matchers.shouldBe
 import io.mockk.every
 import io.mockk.mockk
-import org.springframework.boot.test.context.SpringBootTest
 
 
 class DevtiAnalysisServiceTest : FunSpec() {
 
     private val biasService = mockk<BiasService>()
-    private val devtiAnalysiService = DevtiAnalysiService(biasService)
+    private val devtiAnalysiService = DevtiAnalysisService(biasService)
 
     private val answerList = mutableListOf<AnswerAttribute>()
     private var result = HashMap<BiasType, Int>()
+    private var biasResult = HashMap<BiasType, Int>()
+
 
     private val mockAnswer = MockAnswer
     private val biasList: List<Bias> = MockBiasListNotInReference.biasList
@@ -92,6 +89,7 @@ class DevtiAnalysisServiceTest : FunSpec() {
 
             //when
             result = devtiAnalysiService.analysisAnswer(answerList)
+            print(result.toString())
 
             //then
             result.get(BiasType.V) shouldBe 100
@@ -102,6 +100,27 @@ class DevtiAnalysisServiceTest : FunSpec() {
             result.get(BiasType.C) shouldBe 0
             result.get(BiasType.W) shouldBe 100
             result.get(BiasType.L) shouldBe 0
+        }
+
+
+        test("classifyDevtiByPillar") {
+            //given
+            biasResult[BiasType.T] = 0
+            biasResult[BiasType.W] = 100
+            biasResult[BiasType.A] = 0
+            biasResult[BiasType.C] = 0
+            biasResult[BiasType.P] = 100
+            biasResult[BiasType.L] = 0
+            biasResult[BiasType.S] = 100
+            biasResult[BiasType.V] = 100
+
+
+            //when
+            val result = devtiAnalysiService.classifyDevtiByPillar(biasResult)
+
+            //then
+            val keys = result.keys
+
         }
 
 
