@@ -95,9 +95,9 @@ class DevtiAnalysisService(
         return result
     }
 
-    fun classifyDevtiByPillar(biasResult: HashMap<BiasType, Int>): HashMap<BiasType, Int> {
+    fun classifyDevtiByPillar(biasResult: HashMap<BiasType, Int>): LinkedHashMap<BiasType, Int> {
 
-        val resultMap: HashMap<BiasType, Int> = LinkedHashMap()
+        val resultMap = LinkedHashMap<BiasType, Int>()
 
         for (pillar: Pillar in Pillar.values()) {
 
@@ -113,7 +113,7 @@ class DevtiAnalysisService(
 
             val value: Int = if (firstValue > secondValue) firstValue else secondValue
 
-            resultMap.put(key, value)
+           resultMap.put(key, value)
         }
 
         return resultMap
