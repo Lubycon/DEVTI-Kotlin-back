@@ -11,4 +11,6 @@ class ReviewService(
 
     fun findByReviewType(reviewType: String) = reviewRepository.findReviewByReviewType(reviewType)
 
+    fun findContentsByReviewType(reviewType: String) = reviewRepository.findContentsByReviewType(reviewType)
+
 }
