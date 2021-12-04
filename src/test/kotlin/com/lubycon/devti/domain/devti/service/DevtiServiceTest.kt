@@ -1,30 +1,25 @@
 package com.lubycon.devti.domain.devti.service
 
 import com.google.gson.Gson
+import com.google.gson.JsonArray
+import com.google.gson.reflect.TypeToken
 import com.lubycon.devti.bdd.behavior.devti.MockAnswer
-import com.lubycon.devti.domain.advertisement.dao.AdvertisementRepository
 import com.lubycon.devti.domain.advertisement.service.AdvertisementService
-import com.lubycon.devti.domain.answer.dao.AnswerRepository
 import com.lubycon.devti.domain.answer.entity.AnswerAttribute
 import com.lubycon.devti.domain.answer.service.AnswerService
 import com.lubycon.devti.domain.bias.MockBiasListNotInReference
-import com.lubycon.devti.domain.bias.dao.BiasRepository
 import com.lubycon.devti.domain.bias.entity.Bias
 import com.lubycon.devti.domain.bias.service.BiasService
 import com.lubycon.devti.domain.devti.dao.DevtiRepository
-import com.lubycon.devti.domain.review.dao.ReviewRepository
 import com.lubycon.devti.domain.review.entity.Review
 import com.lubycon.devti.domain.review.service.ReviewService
 import com.lubycon.devti.global.code.BiasType
 import com.lubycon.devti.global.code.Pillar
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.core.test.TestCase
-import io.kotest.extensions.spring.SpringExtension
 import io.kotest.matchers.shouldBe
-import org.junit.jupiter.api.Assertions.*
 import io.mockk.every
 import io.mockk.mockk
-import org.springframework.boot.test.context.SpringBootTest
 
 class DevtiServiceTest : FunSpec() {
 
@@ -73,17 +68,17 @@ class DevtiServiceTest : FunSpec() {
         }
         answerList.add(mockAnswer.role_gage_answer(7))
 
-        for (i in 8..15) {
+        for (i in 8..16) {
             answerList.add(mockAnswer.scale_preset_answer(i.toLong()))
         }
-        for (i in 16..23) {
+        for (i in 17..25) {
             answerList.add(mockAnswer.interest_preset_answer(i.toLong()))
         }
-        for (i in 24..27) {
+        for (i in 26..29) {
             answerList.add(mockAnswer.priority_preset_answer(i.toLong()))
         }
 
-        for (i in 28..29) {
+        for (i in 30..32) {
             answerList.add(mockAnswer.priority_gage_answer(i.toLong()))
         }
         answerList.add(mockAnswer.career())
@@ -113,6 +108,14 @@ class DevtiServiceTest : FunSpec() {
 
 
     init {
+        test("temp") {
+
+            val gson = Gson()
+            val jsonString = gson.toJson(answerList)
+
+            println(jsonString)
+
+        }
 
         test("getDevtiByAnswer") {
             //given
@@ -165,16 +168,18 @@ class DevtiServiceTest : FunSpec() {
             every { biasService.findBiasListByBiasIsNotIn(Pillar.REFERENCE.biasList) } returns biasList
             every { reviewService.findByReviewType(any()) } returns review
 
-
-
             //when
-            val result = devtiService.getBiasResults("VSPW", result, reviewTypeMap)
+            val result2 = devtiService.getBiasResults("VSPW", result, reviewTypeMap)
 
             //then
-            println(result.toString())
+            println("?"+result2.toString())
         }
 
     }
 
 
 }
+
+
+
+

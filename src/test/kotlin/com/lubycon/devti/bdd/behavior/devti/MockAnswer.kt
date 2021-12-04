@@ -83,7 +83,7 @@ object MockAnswer {
     fun job(
 
     ) = AnswerAttribute(
-        id = 30,
+        id = 33,
         answerType = AnswerType.INFO,
         sequence = 0L,
         bias =  BiasType.J,
@@ -91,7 +91,7 @@ object MockAnswer {
     )
 
     fun career() = AnswerAttribute(
-        id = 31,
+        id = 34,
         answerType = AnswerType.INFO,
         sequence = 0L,
         bias =  BiasType.Y,

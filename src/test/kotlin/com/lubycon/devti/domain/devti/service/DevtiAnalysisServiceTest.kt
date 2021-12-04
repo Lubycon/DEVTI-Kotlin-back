@@ -27,26 +27,28 @@ class DevtiAnalysisServiceTest : FunSpec() {
     private val mockAnswer = MockAnswer
     private val biasList: List<Bias> = MockBiasListNotInReference.biasList
 
-    override fun beforeTest(testCase: TestCase) {
+영    override fun beforeEach(testCase: TestCase) {
         print("run before Test")
         for (i in 1..6) {
             answerList.add(mockAnswer.role_preset_answer(i.toLong()))
         }
         answerList.add(mockAnswer.role_gage_answer(7))
 
-        for (i in 8..15) {
+        for (i in 8..16) {
             answerList.add(mockAnswer.scale_preset_answer(i.toLong()))
         }
-        for (i in 16..23) {
+        for (i in 17..25) {
             answerList.add(mockAnswer.interest_preset_answer(i.toLong()))
         }
-        for (i in 24..27) {
+        for (i in 26..29) {
             answerList.add(mockAnswer.priority_preset_answer(i.toLong()))
         }
 
-        for(i in 28..29) {
+        for (i in 30..32) {
             answerList.add(mockAnswer.priority_gage_answer(i.toLong()))
         }
+        answerList.add(mockAnswer.career())
+        answerList.add(mockAnswer.job())
 
     }
 
@@ -73,13 +75,16 @@ class DevtiAnalysisServiceTest : FunSpec() {
         test("checkPillarWeight") {
 
             //when
+            println(answerList.toString())
             val result = devtiAnalysiService.checkPillarWeight(answerList)
+
+            println(result.toString())
 
             //then
             result.roleWeight shouldBe 7
-            result.scaleWeight shouldBe 8
-            result.interestWeight shouldBe 8
-            result.priorityWeight shouldBe 6
+            result.scaleWeight shouldBe 9
+            result.interestWeight shouldBe 9
+            result.priorityWeight shouldBe 7
         }
 
 
