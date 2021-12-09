@@ -2,6 +2,7 @@ package com.lubycon.devti.domain.devti.api
 
 import com.lubycon.devti.domain.answer.entity.AnswerAttribute
 import com.lubycon.devti.domain.devti.dto.request.DevtiReqDto
+import com.lubycon.devti.domain.devti.dto.response.DevtiRatioDto
 import com.lubycon.devti.domain.devti.dto.response.DevtiResDto
 import com.lubycon.devti.domain.devti.service.DevtiService
 import com.lubycon.devti.global.code.BiasType
@@ -49,5 +50,10 @@ class DevtiController(
         biasResult.put(BiasType.W, w);
         biasResult.put(BiasType.L, l);
         return ResponseEntity.ok(devtiService.getDevtiByAnswer(biasResult, job!!))
+    }
+
+    @GetMapping("/ratio")
+    fun getDevtiRatio(): ArrayList<DevtiRatioDto> {
+        return devtiService.getDevtiRatio()
     }
 }
