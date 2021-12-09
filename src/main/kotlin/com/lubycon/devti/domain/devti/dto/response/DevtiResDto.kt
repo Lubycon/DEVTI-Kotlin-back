@@ -21,4 +21,6 @@ data class DevtiResDto(
     @ApiModelProperty(value = "학습, 채용공고")
     val advertisementList: List<Advertisement>,
 
-)
+    @ApiModelProperty(value = "가장 많은 유형")
+    val devtiRatioList: List<DevtiRatioDto>
+ )

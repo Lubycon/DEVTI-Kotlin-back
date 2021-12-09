@@ -20,7 +20,7 @@ class Review(
 
     @Lob
     @Column(length = 500)
-    private val title: String,
+    val title: String,
 
     @Lob
     @Column(length = 500)
