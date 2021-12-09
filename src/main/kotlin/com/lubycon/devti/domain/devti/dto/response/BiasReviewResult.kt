@@ -16,7 +16,10 @@ data class BiasReviewResult(
     @ApiModelProperty(value = "Bias percent", example = "10")
     val weight: Int?,
 
+    @ApiModelProperty(value = "Bias 타이틀")
+    val biasTitle: String,
+
     @ApiModelProperty(value = "Bias 총평", example = "필러 총평")
-    val review: ReviewResDto
+    val reviewList: List<String>?
 
 )
