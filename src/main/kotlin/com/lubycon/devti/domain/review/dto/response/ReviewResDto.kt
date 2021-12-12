@@ -7,9 +7,6 @@ data class ReviewResDto(
 
     @Column(length = 500)
     val title: String?,
-
-    @Lob
-    @Column(length = 500)
-    val contents: String?,
+    val contents: String,
 
 )

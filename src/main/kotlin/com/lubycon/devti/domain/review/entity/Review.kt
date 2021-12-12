@@ -24,7 +24,7 @@ class Review(
 
     @Lob
     @Column(length = 500)
-    private val contents: String
+    val contents: String
 
 ){
     companion object {

@@ -13,6 +13,7 @@ import com.lubycon.devti.domain.devti.dto.response.DevtiRatioDto
 import com.lubycon.devti.domain.devti.dto.response.DevtiResDto
 import com.lubycon.devti.domain.devti.dto.response.DevtiResDto2
 import com.lubycon.devti.domain.devti.entity.Devti
+import com.lubycon.devti.domain.review.dto.response.GeneralReviewDto
 import com.lubycon.devti.domain.review.entity.Review
 import com.lubycon.devti.domain.review.entity.Review.Companion.toResDto
 import com.lubycon.devti.domain.review.service.ReviewService
@@ -23,6 +24,7 @@ import org.springframework.stereotype.Service
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.LinkedHashMap
+import kotlin.math.log
 
 private val logger = KotlinLogging.logger {}
 
@@ -91,9 +93,7 @@ class DevtiService(
 
         val reviewTypeMap: MutableMap<BiasType, String> = HashMap()
         val roleReviewType: Map.Entry<BiasType, String> = getRolePillarReviewType(winBiasResult, job)
-        logger.info { "role " + roleReviewType.toString()  } //VF
         val scalePillarReviewType: Map.Entry<BiasType, String> = getScalePillarReviewType(winBiasResult)
-        logger.info { "scale " + scalePillarReviewType.toString()  }
 
         reviewTypeMap.put(roleReviewType.key, roleReviewType.value)
         reviewTypeMap.put(scalePillarReviewType.key, scalePillarReviewType.value)
@@ -101,11 +101,25 @@ class DevtiService(
         val generalReview: Review = reviewService.findByReviewType(devtiString).get(0)
 
         return DevtiResDto2(
-            generalReview = toResDto(generalReview),
+            generalReview = getGeneralReview(devtiString, job),
             biasResults = getBiasResults(devtiString, biasResult, reviewTypeMap),
             advertisementList = advertisementService.findAll(),
             devtiRatioList = getDevtiRatio()
         )
+    }
+
+    fun getGeneralReview(devti: String, job: String): GeneralReviewDto {
+
+        val generalReview: Review = reviewService.findByReviewType(devti).get(0)
+        val getAV = reviewService.findByReviewType(devti[0].toString()+job).first().contents
+        val getPT = reviewService.findByReviewType(devti[2].toString()).first().contents
+        val summaryList = listOf<String>(getAV, getPT)
+
+        return GeneralReviewDto(
+            devti = toResDto(generalReview),
+            summaryReview = summaryList
+        )
+
     }
 
     fun getRolePillarReviewType(winBiasResult: HashMap<BiasType, Int>, job: String): Map.Entry<BiasType, String> {
@@ -204,13 +218,10 @@ class DevtiService(
         var devtiRatioList = ArrayList<DevtiRatioDto>()
 
         for(key in results.keys) {
-
             if(count == 3) break;
-
             val ratio = (results.getValue(key).toDouble() / totalCount) * 100
             devtiRatioList.add(DevtiRatioDto(key, ratio))
             count ++;
-
         }
         return devtiRatioList
     }
