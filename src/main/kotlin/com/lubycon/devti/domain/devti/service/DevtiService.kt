@@ -185,7 +185,7 @@ class DevtiService(
 
             val biasReviewResult =
                 BiasReviewResult(
-                    bias = bias,
+                    bias = bias.bias.toString(),
                     weight = biasResult.get(biasType),
                     biasTitle = biasTitle,
                     reviewList = contentsList
