@@ -21,8 +21,10 @@ import com.lubycon.devti.global.code.BiasType
 import com.lubycon.devti.global.code.Pillar
 import mu.KotlinLogging
 import org.springframework.stereotype.Service
+import java.lang.StringBuilder
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 import kotlin.collections.LinkedHashMap
 import kotlin.math.log
 
@@ -43,7 +45,20 @@ class DevtiService(
         const val SCALE_PILLAR_REVIEW_TYPE_2: String = "2"
         const val DESIRED_JOB_F: String = "F"
         const val DESIRED_JOB_B: String = "B"
+
+        val devtiMap = mapOf<Char, String>(
+            'V' to "시각화",
+            'A' to "설계",
+            'S' to "스타트업",
+            'C' to "대기업",
+            'P' to "프로덕트",
+            'T' to "테크",
+            'W' to "워라하",
+            'L' to "워라벨"
+            )
+
     }
+
 
     fun analysisAndCreateDevti(answerAttributeList: List<AnswerAttribute>): DevtiReqDto {
 
@@ -110,13 +125,23 @@ class DevtiService(
 
     fun getGeneralReview(devti: String, job: String): GeneralReviewDto {
 
-        val generalReview: Review = reviewService.findByReviewType(devti).get(0)
+        val review: Review = reviewService.findByReviewType(devti).get(0)
         val getAV = reviewService.findByReviewType(devti[0].toString()+job).first().contents
         val getPT = reviewService.findByReviewType(devti[2].toString()).first().contents
         val summaryList = listOf<String>(getAV, getPT)
 
+        val content = StringBuilder()
+
+        for(pillar : Char in devti) {
+            content.append(devtiMap[pillar]).append("/")
+        }
+
+        content.deleteCharAt(content.lastIndexOf("/"))
+
+
         return GeneralReviewDto(
-            devti = toResDto(generalReview),
+            title = review.contents,
+            content = content.toString(),
             summaryReview = summaryList
         )
 
