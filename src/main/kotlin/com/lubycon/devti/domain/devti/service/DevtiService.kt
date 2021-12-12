@@ -36,7 +36,7 @@ class DevtiService(
     private val reviewService: ReviewService
 ) {
     companion object {
-        const val SCALE_PILLAR_REVIEW_TYPE_THRESHOLD: Int = 50
+        const val SCALE_PILLAR_REVIEW_TYPE_THRESHOLD: Int = 75
         const val SCALE_PILLAR_REVIEW_TYPE_1: String = "1"
         const val SCALE_PILLAR_REVIEW_TYPE_2: String = "2"
         const val DESIRED_JOB_F: String = "F"
@@ -90,7 +90,6 @@ class DevtiService(
         val devtiString = getDevtiString(winBiasResult)
 
         val reviewTypeMap: MutableMap<BiasType, String> = HashMap()
-
         val roleReviewType: Map.Entry<BiasType, String> = getRolePillarReviewType(winBiasResult, job)
         logger.info { "role " + roleReviewType.toString()  } //VF
         val scalePillarReviewType: Map.Entry<BiasType, String> = getScalePillarReviewType(winBiasResult)
