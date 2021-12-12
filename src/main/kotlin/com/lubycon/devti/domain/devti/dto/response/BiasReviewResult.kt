@@ -9,7 +9,7 @@ import javax.validation.constraints.Min
 data class BiasReviewResult(
 
     @ApiModelProperty(value = "Bias 정보")
-    val bias: Bias,
+    val bias: String,
 
     @Min(0)
     @Max(100)
