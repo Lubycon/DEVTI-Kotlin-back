@@ -22,4 +22,7 @@ data class BiasReviewResult(
     @ApiModelProperty(value = "Bias 총평", example = "필러 총평")
     val reviewList: List<String>?
 
-)
+){
+    constructor() : this("", 0, "", emptyList())
+
+}
