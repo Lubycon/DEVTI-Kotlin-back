@@ -6,23 +6,22 @@ import io.swagger.annotations.ApiModelProperty
 import javax.validation.constraints.Max
 import javax.validation.constraints.Min
 
-data class BiasReviewResult(
+data class BiasReviewResult_v2(
 
     @ApiModelProperty(value = "Bias 정보")
-    val bias: String,
+    var bias: String?,
 
     @Min(0)
     @Max(100)
     @ApiModelProperty(value = "Bias percent", example = "10")
-    val weight: Int?,
+    var weight: Int?,
 
     @ApiModelProperty(value = "Bias 타이틀")
-    val biasTitle: String,
+    var biasTitle: String?,
 
     @ApiModelProperty(value = "Bias 총평", example = "필러 총평")
-    val reviewList: List<String>?
-
-){
+    var reviewList: List<String>?
+) {
     constructor() : this("", 0, "", emptyList())
 
 }

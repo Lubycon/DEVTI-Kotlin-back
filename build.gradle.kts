@@ -72,6 +72,16 @@ dependencies {
 
     implementation("com.google.code.gson:gson:2.8.8")
 
+    //actuator
+    implementation("org.springframework.boot:spring-boot-starter-actuator:2.5.6")
+
+    //prometheus
+    implementation("io.micrometer:micrometer-registry-prometheus:1.8.0")
+
+
+
+
+
 
 
 

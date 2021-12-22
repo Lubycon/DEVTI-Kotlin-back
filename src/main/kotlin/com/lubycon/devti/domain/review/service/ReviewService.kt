@@ -9,6 +9,8 @@ class ReviewService(
     private val reviewRepository: ReviewRepository
 ) {
 
-    fun findByReviewType(reviewType: String) = reviewRepository.findReviewByReviewType(reviewType)
+    fun findByReviewType(reviewType: String): List<Review> = reviewRepository.findReviewByReviewType(reviewType)
+
+    fun findContentsByReviewType(reviewType: String) = reviewRepository.findContentsByReviewType(reviewType)
 
 }

@@ -2,7 +2,9 @@ package com.lubycon.devti.domain.devti.api
 
 import com.lubycon.devti.domain.answer.entity.AnswerAttribute
 import com.lubycon.devti.domain.devti.dto.request.DevtiReqDto
+import com.lubycon.devti.domain.devti.dto.response.DevtiRatioDto
 import com.lubycon.devti.domain.devti.dto.response.DevtiResDto
+import com.lubycon.devti.domain.devti.dto.response.DevtiResDto2
 import com.lubycon.devti.domain.devti.service.DevtiService
 import com.lubycon.devti.global.code.BiasType
 import io.swagger.annotations.Api
@@ -26,9 +28,34 @@ class DevtiController(
     }
 
 
-    @GetMapping
+//    @GetMapping
+//    @ApiOperation(value = "결과 요청값으로 결과 반환 받기")
+//    fun getDevtiByQueryString(
+//        @RequestParam("V") v: Int,
+//        @RequestParam("A") a: Int,
+//        @RequestParam("S") s: Int,
+//        @RequestParam("C") c: Int,
+//        @RequestParam("P") p: Int,
+//        @RequestParam("T") t: Int,
+//        @RequestParam("W") w: Int,
+//        @RequestParam("L") l: Int,
+//        @RequestParam("job") job: String?
+//    ): ResponseEntity<DevtiResDto> {
+//        val biasResult: HashMap<BiasType, Int> = HashMap<BiasType, Int>()
+//        biasResult.put(BiasType.V, v);
+//        biasResult.put(BiasType.A, a);
+//        biasResult.put(BiasType.S, s);
+//        biasResult.put(BiasType.C, c);
+//        biasResult.put(BiasType.P, p);
+//        biasResult.put(BiasType.T, t);
+//        biasResult.put(BiasType.W, w);
+//        biasResult.put(BiasType.L, l);
+//        return ResponseEntity.ok(devtiService.getDevtiByAnswer(biasResult, job!!))
+//    }
+
+    @GetMapping()
     @ApiOperation(value = "결과 요청값으로 결과 반환 받기")
-    fun getDevtiByQueryString(
+    fun getDevtiByQueryString2(
         @RequestParam("V") v: Int,
         @RequestParam("A") a: Int,
         @RequestParam("S") s: Int,
@@ -38,7 +65,7 @@ class DevtiController(
         @RequestParam("W") w: Int,
         @RequestParam("L") l: Int,
         @RequestParam("job") job: String?
-    ): ResponseEntity<DevtiResDto> {
+    ): ResponseEntity<DevtiResDto2> {
         val biasResult: HashMap<BiasType, Int> = HashMap<BiasType, Int>()
         biasResult.put(BiasType.V, v);
         biasResult.put(BiasType.A, a);
@@ -48,6 +75,11 @@ class DevtiController(
         biasResult.put(BiasType.T, t);
         biasResult.put(BiasType.W, w);
         biasResult.put(BiasType.L, l);
-        return ResponseEntity.ok(devtiService.getDevtiByAnswer(biasResult, job!!))
+        return ResponseEntity.ok(devtiService.getDevtiByAnswer_v2(biasResult, job!!))
+    }
+
+    @GetMapping("/ratio")
+    fun getDevtiRatio(): ArrayList<DevtiRatioDto> {
+        return devtiService.getDevtiRatio()
     }
 }
