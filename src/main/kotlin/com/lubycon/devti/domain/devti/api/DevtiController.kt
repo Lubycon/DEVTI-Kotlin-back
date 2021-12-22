@@ -28,32 +28,32 @@ class DevtiController(
     }
 
 
-    @GetMapping
-    @ApiOperation(value = "결과 요청값으로 결과 반환 받기")
-    fun getDevtiByQueryString(
-        @RequestParam("V") v: Int,
-        @RequestParam("A") a: Int,
-        @RequestParam("S") s: Int,
-        @RequestParam("C") c: Int,
-        @RequestParam("P") p: Int,
-        @RequestParam("T") t: Int,
-        @RequestParam("W") w: Int,
-        @RequestParam("L") l: Int,
-        @RequestParam("job") job: String?
-    ): ResponseEntity<DevtiResDto> {
-        val biasResult: HashMap<BiasType, Int> = HashMap<BiasType, Int>()
-        biasResult.put(BiasType.V, v);
-        biasResult.put(BiasType.A, a);
-        biasResult.put(BiasType.S, s);
-        biasResult.put(BiasType.C, c);
-        biasResult.put(BiasType.P, p);
-        biasResult.put(BiasType.T, t);
-        biasResult.put(BiasType.W, w);
-        biasResult.put(BiasType.L, l);
-        return ResponseEntity.ok(devtiService.getDevtiByAnswer(biasResult, job!!))
-    }
+//    @GetMapping
+//    @ApiOperation(value = "결과 요청값으로 결과 반환 받기")
+//    fun getDevtiByQueryString(
+//        @RequestParam("V") v: Int,
+//        @RequestParam("A") a: Int,
+//        @RequestParam("S") s: Int,
+//        @RequestParam("C") c: Int,
+//        @RequestParam("P") p: Int,
+//        @RequestParam("T") t: Int,
+//        @RequestParam("W") w: Int,
+//        @RequestParam("L") l: Int,
+//        @RequestParam("job") job: String?
+//    ): ResponseEntity<DevtiResDto> {
+//        val biasResult: HashMap<BiasType, Int> = HashMap<BiasType, Int>()
+//        biasResult.put(BiasType.V, v);
+//        biasResult.put(BiasType.A, a);
+//        biasResult.put(BiasType.S, s);
+//        biasResult.put(BiasType.C, c);
+//        biasResult.put(BiasType.P, p);
+//        biasResult.put(BiasType.T, t);
+//        biasResult.put(BiasType.W, w);
+//        biasResult.put(BiasType.L, l);
+//        return ResponseEntity.ok(devtiService.getDevtiByAnswer(biasResult, job!!))
+//    }
 
-    @GetMapping("/new")
+    @GetMapping()
     @ApiOperation(value = "결과 요청값으로 결과 반환 받기")
     fun getDevtiByQueryString2(
         @RequestParam("V") v: Int,

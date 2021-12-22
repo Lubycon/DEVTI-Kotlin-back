@@ -11,7 +11,7 @@ data class DevtiResDto2(
     val generalReview: GeneralReviewDto,
 
     @ApiModelProperty(value = "Bias 결과 리스트 ")
-    val biasResults: List<BiasReviewResult>,
+    val biasResults: MutableMap<String, BiasReviewResult>,
 
     @ApiModelProperty(value = "학습, 채용공고")
     val advertisementList: List<Advertisement>,
