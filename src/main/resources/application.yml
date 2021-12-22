@@ -11,10 +11,11 @@ spring:
     hibernate:
       ddl-auto: validate
 
+
     properties:
       hibernate:
         #show_sql: true
-        format_sql: true
+#        format_sql: true
 
   data:
     rest:
@@ -28,9 +29,10 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/devti_kotlin?allowMultiQueries=true&useSSL=false&useUnicode=yes&characterEncoding=UTF-8&characterSetResults=UTF-8&passwordCharacterEncoding=UTF-8
     username: root
     password: password
-  sql:
-    init:
-      mode: always
+#
+#  sql:
+#    init:
+#      mode: always
 
 
 management:
