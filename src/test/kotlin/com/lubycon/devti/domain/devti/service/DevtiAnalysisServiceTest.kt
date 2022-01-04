@@ -27,7 +27,7 @@ class DevtiAnalysisServiceTest : FunSpec() {
     private val mockAnswer = MockAnswer
     private val biasList: List<Bias> = MockBiasListNotInReference.biasList
 
-영    override fun beforeEach(testCase: TestCase) {
+    override fun beforeEach(testCase: TestCase) {
         print("run before Test")
         for (i in 1..6) {
             answerList.add(mockAnswer.role_preset_answer(i.toLong()))
