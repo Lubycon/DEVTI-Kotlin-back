@@ -64,7 +64,7 @@ class DevtiController(
         @RequestParam("T") t: Int,
         @RequestParam("W") w: Int,
         @RequestParam("L") l: Int,
-        @RequestParam("job") job: String?
+        @RequestParam("job") job: String
     ): ResponseEntity<DevtiResDto2> {
         val biasResult: HashMap<BiasType, Int> = HashMap<BiasType, Int>()
         biasResult.put(BiasType.V, v);
@@ -75,7 +75,7 @@ class DevtiController(
         biasResult.put(BiasType.T, t);
         biasResult.put(BiasType.W, w);
         biasResult.put(BiasType.L, l);
-        return ResponseEntity.ok(devtiService.getDevtiByAnswer_v2(biasResult, job!!))
+        return ResponseEntity.ok(devtiService.getDevtiByAnswer_v2(biasResult, job))
     }
 
     @GetMapping("/ratio")
