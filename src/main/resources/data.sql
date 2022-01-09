@@ -69,7 +69,7 @@ INSERT INTO question (created_at, updated_at, pillar, title, answer_type) VALUES
                                                                               (now(), now(), 'PRIORITY', '부캐를 일로 연결시킬 수 있다면 나는..', 'PRESET'),
                                                                               (now(), now(), 'PRIORITY', '나는 자아실현을', 'PRESET'),
                                                                               (now(), now(), 'PRIORITY', '업무 외 시간이 생겨서 활용해보려고 한다. 무엇을 할까?', 'PRESET'),
-                                                                              (now(), now(), 'PRIORITY', '업무 외 시간이 생겨서 활용해보려고 한다. 무엇을 할까?', 'PRESET'),
+                                                                              (now(), now(), 'PRIORITY', '평생 일을 안 해도 먹고살 수 있을 만큼의 돈이 생겼다. ', 'PRESET'),
                                                                               (now(), now(), 'PRIORITY', '할 수만 있다면 평생 일 하며 살고 싶다. ', 'GAGE'),
                                                                               (now(), now(), 'PRIORITY', '업무가 재밌다면 칼퇴하지 않아도 상관없다.', 'GAGE'),
                                                                               (now(), now(), 'PRIORITY', '일이 나에게 주는 가장 큰 가치는 자아실현이다.', 'GAGE'),
@@ -112,7 +112,7 @@ INSERT INTO preset (created_at, updated_at, question_id, sequence, label, bias, 
                                                                                             (now(), now(), 8, 1, '내가 뭘 하면 좋을까? 어떤 역할을 하면 좋을지, 선배한테 물어본다.', 'C', 1),
 
                                                                                             (now(), now(), 9, 0, '동아리 활동에 사용했다는 것만 확인되면 OK. 영수증과 사용 금액만 올려달라고 한다.', 'S', 1),
-                                                                                            (now(), now(), 9, 1, '처음 영상 촬영하기에 괜찮은 장비가 뭐가있지? ', 'C', 1),
+                                                                                            (now(), now(), 9, 1, '이전 기수에서 해왔던 방식을 참고해 사용처∙목적∙영수증 이미지가 담긴 파일을 제출해달라고 한다.', 'C', 1),
 
                                                                                             (now(), now(), 10, 0, '일단 핸드폰으로 시작해보지 뭐~!', 'S', 1),
                                                                                             (now(), now(), 10, 1, '이왕 한다면 제대로 해보고 싶다! 기본적인 장비를 마련하고, 편집 강의를 보며 일단 실력을 키운다.', 'C', 1),
