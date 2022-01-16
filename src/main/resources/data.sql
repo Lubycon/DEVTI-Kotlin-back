@@ -28,11 +28,11 @@ INSERT INTO bias(pillar, bias, en_bias, kr_bias) VALUES
                                                      ('ROLE', 'V', 'Visualization', '시각화'),
                                                      ('ROLE', 'A', 'Architecture', '설계'),
                                                      ('SCALE', 'S', 'Startup', '스타트업'),
-                                                     ('SCALE', 'C', 'Corporation', '대기업'),
-                                                     ('INTEREST', 'P', 'Product', '상품'),
-                                                     ('INTEREST', 'T', 'Technology', '기술'),
-                                                     ('PRIORITY', 'W', 'Work', '업무'),
-                                                     ('PRIORITY', 'L', 'Life', '개인시간'),
+                                                     ('SCALE', 'C', 'Corporation', 'IT대기업'),
+                                                     ('INTEREST', 'P', 'Product', '프로덕트'),
+                                                     ('INTEREST', 'T', 'Technology', '테크'),
+                                                     ('PRIORITY', 'W', 'Work', '커리어'),
+                                                     ('PRIORITY', 'L', 'Life', '라이프'),
                                                      ('REFERENCE', 'J', 'ETC', '기타'),
                                                      ('REFERENCE', 'Y', 'ETC', '기타');
 
