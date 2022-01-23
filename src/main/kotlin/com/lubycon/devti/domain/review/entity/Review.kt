@@ -4,7 +4,8 @@ import com.lubycon.devti.domain.review.dto.response.ReviewResDto
 import javax.persistence.*
 
 @Entity
-class Review(
+class Review
+    (
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +22,8 @@ class Review(
     @Lob
     @Column(length = 500)
     val title: String,
+
+    val emoji: String,
 
     @Lob
     @Column(length = 500)

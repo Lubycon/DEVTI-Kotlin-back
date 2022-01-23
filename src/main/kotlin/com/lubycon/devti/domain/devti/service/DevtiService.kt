@@ -10,8 +10,8 @@ import com.lubycon.devti.domain.devti.dao.DevtiRepository
 import com.lubycon.devti.domain.devti.dto.request.DevtiReqDto
 import com.lubycon.devti.domain.devti.dto.response.BiasReviewResult
 import com.lubycon.devti.domain.devti.dto.response.DevtiRatioDto
-import com.lubycon.devti.domain.devti.dto.response.mogako.DEVTIResNewDto
-import com.lubycon.devti.domain.devti.dto.response.mogako.DevtiResDto3
+import com.lubycon.devti.domain.devti.dto.response.mogako.DevtiBiasResDto
+import com.lubycon.devti.domain.devti.dto.response.mogako.DevtiResDto
 import com.lubycon.devti.domain.devti.dto.response.mogako.biasResNewDto
 import com.lubycon.devti.domain.devti.entity.Devti
 import com.lubycon.devti.domain.review.dto.response.GeneralReviewDto
@@ -81,7 +81,7 @@ class DevtiService(
         return DevtiReqDto(job = job, result = biasResult)
     }
 
-    fun getDevtiByAnswer(biasResult: HashMap<BiasType, Int>, job: String): DevtiResDto3 {
+    fun getDevtiByAnswer(biasResult: HashMap<BiasType, Int>, job: String): DevtiResDto {
 
         val winBiasResult: LinkedHashMap<BiasType, Int> = devtiAnalysisService.classifyDevtiByPillar(biasResult)
 
@@ -98,7 +98,7 @@ class DevtiService(
         val generalReview: Review = reviewService.findByReviewType(devtiString).get(0)
 
 
-        return DevtiResDto3(
+        return DevtiResDto(
             generalReview = getGeneralReview(devtiString, job),
             biasResults = getBiasResults(devtiString, biasResult, reviewTypeMap),
             advertisementList = advertisementService.findAll(),
@@ -171,7 +171,7 @@ class DevtiService(
         devti: String,
         biasResult: HashMap<BiasType, Int>,
         reviewTypeMap: MutableMap<BiasType, String>
-    ): List<DEVTIResNewDto> {
+    ): List<DevtiBiasResDto> {
 
         val biasList: List<Bias> = biasService.findBiasListByBiasIsNotIn(Pillar.REFERENCE.biasList)
         val biasReviewResults: MutableList<BiasReviewResult> = ArrayList(8)
@@ -211,7 +211,7 @@ class DevtiService(
         }
 
 
-        var testList: MutableList<DEVTIResNewDto> = ArrayList(4)
+        var testList: MutableList<DevtiBiasResDto> = ArrayList(4)
         var index = 0;
 
         logger.info { "CHECK" }
@@ -223,7 +223,7 @@ class DevtiService(
             logger.info { "WAMT!!!" + devtiMap[biasResult.bias.single()] }
 
 
-            var dto = DEVTIResNewDto(
+            var dto = DevtiBiasResDto(
                 id = index,
                 bias1 = biasResNewDto(devtiMap[biasResult.bias.single()]!!, biasResult.weight!!),
                 bias2 = biasResNewDto(

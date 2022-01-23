@@ -1,6 +1,7 @@
 package com.lubycon.devti.domain.devti.dto.response
 
 import com.lubycon.devti.domain.bias.entity.Bias
+import com.lubycon.devti.domain.review.dto.response.ResultResDto
 import com.lubycon.devti.domain.review.dto.response.ReviewResDto
 import io.swagger.annotations.ApiModelProperty
 import javax.validation.constraints.Max
@@ -20,7 +21,8 @@ data class BiasReviewResult(
     val biasTitle: String,
 
     @ApiModelProperty(value = "Bias 총평", example = "필러 총평")
-    val reviewList: List<String>?
+    val reviewList: List<ResultResDto>
+
 
 ){
     constructor() : this("", 0, "", emptyList())
