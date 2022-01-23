@@ -8,21 +8,21 @@ import com.lubycon.devti.domain.bias.entity.Bias
 import com.lubycon.devti.domain.bias.service.BiasService
 import com.lubycon.devti.domain.devti.dao.DevtiRepository
 import com.lubycon.devti.domain.devti.dto.request.DevtiReqDto
-import com.lubycon.devti.domain.devti.dto.response.*
+import com.lubycon.devti.domain.devti.dto.response.BiasReviewResult
+import com.lubycon.devti.domain.devti.dto.response.DevtiRatioDto
+import com.lubycon.devti.domain.devti.dto.response.mogako.DEVTIResNewDto
+import com.lubycon.devti.domain.devti.dto.response.mogako.DevtiResDto3
+import com.lubycon.devti.domain.devti.dto.response.mogako.biasResNewDto
 import com.lubycon.devti.domain.devti.entity.Devti
 import com.lubycon.devti.domain.review.dto.response.GeneralReviewDto
+import com.lubycon.devti.domain.review.dto.response.ResultResDto
 import com.lubycon.devti.domain.review.entity.Review
-import com.lubycon.devti.domain.review.entity.Review.Companion.toResDto
 import com.lubycon.devti.domain.review.service.ReviewService
 import com.lubycon.devti.global.code.BiasType
 import com.lubycon.devti.global.code.Pillar
 import mu.KotlinLogging
 import org.springframework.stereotype.Service
-import java.lang.StringBuilder
 import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
-import kotlin.collections.LinkedHashMap
 
 private val logger = KotlinLogging.logger {}
 
@@ -53,16 +53,20 @@ class DevtiService(
             'L' to "워라벨"
         )
 
-        var biasMap : LinkedHashMap<String, BiasReviewResult> = mutableMapOf<String, BiasReviewResult>(
+        var biasMap: LinkedHashMap<String, BiasReviewResult> = mutableMapOf<String, BiasReviewResult>(
             "VA" to BiasReviewResult(),
             "PT" to BiasReviewResult(),
             "SC" to BiasReviewResult(),
             "WL" to BiasReviewResult()
         ) as LinkedHashMap<String, BiasReviewResult>
 
-
+        var pillarTitleMap: HashMap<String, String> = hashMapOf<String, String>(
+            "VA" to "당신의 개발강점",
+            "PT" to "당신의 개발성향",
+            "SC" to "당신과 어울리는 회사",
+            "WL" to "당신이 추구하는 워라벨"
+        )
     }
-
 
     fun analysisAndCreateDevti(answerAttributeList: List<AnswerAttribute>): DevtiReqDto {
 
@@ -77,39 +81,11 @@ class DevtiService(
         return DevtiReqDto(job = job, result = biasResult)
     }
 
-
-    fun getDevtiByAnswer(biasResult: HashMap<BiasType, Int>, job: String): DevtiResDto {
-
-        val winBiasResult: LinkedHashMap<BiasType, Int> = devtiAnalysisService.classifyDevtiByPillar(biasResult)
-        val devtiString = getDevtiString(winBiasResult)
-
-        val reviewTypeMap: MutableMap<BiasType, String> = HashMap()
-
-        val roleReviewType: Map.Entry<BiasType, String> = getRolePillarReviewType(winBiasResult, job)
-        logger.info { "role " + roleReviewType.toString() } //VF
-        val scalePillarReviewType: Map.Entry<BiasType, String> = getScalePillarReviewType(winBiasResult)
-        logger.info { "scale " + scalePillarReviewType.toString() }
-
-        reviewTypeMap.put(roleReviewType.key, roleReviewType.value)
-        reviewTypeMap.put(scalePillarReviewType.key, scalePillarReviewType.value)
-
-        val generalReview: Review = reviewService.findByReviewType(devtiString).get(0)
-
-        return DevtiResDto(
-            devti = getDevtiString(winBiasResult),
-            devtiTitle = generalReview.headline,
-            generalReview = toResDto(generalReview),
-            biasResults = getBiasResults(devtiString, biasResult, reviewTypeMap),
-            advertisementList = advertisementService.findAll(),
-            devtiRatioList = getDevtiRatio()
-        )
-    }
-
-    fun getDevtiByAnswer_v2(biasResult: HashMap<BiasType, Int>, job: String): DevtiResDto2 {
+    fun getDevtiByAnswer(biasResult: HashMap<BiasType, Int>, job: String): DevtiResDto3 {
 
         val winBiasResult: LinkedHashMap<BiasType, Int> = devtiAnalysisService.classifyDevtiByPillar(biasResult)
 
-        logger.info { "winBias : " + winBiasResult.toString()  }
+        logger.info { "winBias : " + winBiasResult.toString() }
         val devtiString = getDevtiString(winBiasResult)
 
         val reviewTypeMap: MutableMap<BiasType, String> = HashMap()
@@ -122,9 +98,9 @@ class DevtiService(
         val generalReview: Review = reviewService.findByReviewType(devtiString).get(0)
 
 
-        return DevtiResDto2(
+        return DevtiResDto3(
             generalReview = getGeneralReview(devtiString, job),
-            biasResults = getBiasResults2(devtiString, biasResult, reviewTypeMap),
+            biasResults = getBiasResults(devtiString, biasResult, reviewTypeMap),
             advertisementList = advertisementService.findAll(),
             devtiRatioList = getDevtiRatio()
         )
@@ -148,7 +124,7 @@ class DevtiService(
 
         return GeneralReviewDto(
             result = devti,
-            title = review.contents,
+            title = review.headline,
             content = content.toString(),
             summaryReview = summaryList
         )
@@ -195,7 +171,7 @@ class DevtiService(
         devti: String,
         biasResult: HashMap<BiasType, Int>,
         reviewTypeMap: MutableMap<BiasType, String>
-    ): List<BiasReviewResult> {
+    ): List<DEVTIResNewDto> {
 
         val biasList: List<Bias> = biasService.findBiasListByBiasIsNotIn(Pillar.REFERENCE.biasList)
         val biasReviewResults: MutableList<BiasReviewResult> = ArrayList(8)
@@ -204,7 +180,7 @@ class DevtiService(
             logger.info { "CHEK BIAS : " + bias.bias.toString() }
             val biasType: BiasType = bias.bias
             val winnerBias: Boolean = devti.indexOf(biasType.toString()) > -1
-            var contentsList: List<String> = ArrayList<String>()
+            var reviews: List<Review> = ArrayList()
             var biasTitle: String = ""
 
             logger.info { "?????" + reviewTypeMap.toString() }
@@ -212,8 +188,7 @@ class DevtiService(
             if (winnerBias) {
                 val reviewType: String =
                     if (reviewTypeMap.get(biasType) == null) bias.bias.toString() else reviewTypeMap.get(biasType)!!
-                contentsList = reviewService.findContentsByReviewType(reviewType)
-                logger.info { "check " + reviewType + "???" + contentsList.toString() }
+                reviews = reviewService.findByReviewType(reviewType)
 
                 biasTitle = reviewService.findByReviewType(reviewType).first().title
             }
@@ -222,67 +197,12 @@ class DevtiService(
                     bias = bias.bias.toString(),
                     weight = biasResult.get(biasType),
                     biasTitle = biasTitle,
-                    reviewList = contentsList
+                    reviewList = reviews.map { it -> ResultResDto(it.emoji, it.contents) }.toList()
                 )
             biasReviewResults.add(biasReviewResult)
-
-
-
-
         }
 
-        for(biasReview : BiasReviewResult in biasReviewResults) {
-            for ((key, value) in biasMap) {
-                if (key.contains(biasReview.bias) && devti.contains(biasReview.bias)) {
-                    biasMap[key] = biasReview
-                }
-            }
-        }
-
-        logger.info { "please!! : " + biasMap }
-        return biasReviewResults
-    }
-    fun getBiasResults2(
-        devti: String,
-        biasResult: HashMap<BiasType, Int>,
-        reviewTypeMap: MutableMap<BiasType, String>
-    ): MutableMap<String, BiasReviewResult> {
-
-        val biasList: List<Bias> = biasService.findBiasListByBiasIsNotIn(Pillar.REFERENCE.biasList)
-        val biasReviewResults: MutableList<BiasReviewResult> = ArrayList(8)
-
-        for (bias: Bias in biasList) {
-            logger.info { "CHEK BIAS : " + bias.bias.toString() }
-            val biasType: BiasType = bias.bias
-            val winnerBias: Boolean = devti.indexOf(biasType.toString()) > -1
-            var contentsList: List<String> = ArrayList<String>()
-            var biasTitle: String = ""
-
-            logger.info { "?????" + reviewTypeMap.toString() }
-
-            if (winnerBias) {
-                val reviewType: String =
-                    if (reviewTypeMap.get(biasType) == null) bias.bias.toString() else reviewTypeMap.get(biasType)!!
-                contentsList = reviewService.findContentsByReviewType(reviewType)
-                logger.info { "check " + reviewType + "???" + contentsList.toString() }
-
-                biasTitle = reviewService.findByReviewType(reviewType).first().title
-            }
-            val biasReviewResult =
-                BiasReviewResult(
-                    bias = bias.bias.toString(),
-                    weight = biasResult.get(biasType),
-                    biasTitle = biasTitle,
-                    reviewList = contentsList
-                )
-            biasReviewResults.add(biasReviewResult)
-
-
-
-
-        }
-
-        for(biasReview : BiasReviewResult in biasReviewResults) {
+        for (biasReview: BiasReviewResult in biasReviewResults) {
             for ((key, value) in biasMap) {
                 if (key.contains(biasReview.bias) && devti.contains(biasReview.bias)) {
                     biasMap[key] = biasReview
@@ -291,9 +211,35 @@ class DevtiService(
         }
 
 
-        return biasMap
-    }
+        var testList: MutableList<DEVTIResNewDto> = ArrayList(4)
+        var index = 0;
 
+        logger.info { "CHECK" }
+
+        for (pillar in biasMap.keys) {
+
+            var biasResult = biasMap[pillar]!!
+            logger.info { "CHECJ : " + biasResult.bias }
+            logger.info { "WAMT!!!" + devtiMap[biasResult.bias.single()] }
+
+
+            var dto = DEVTIResNewDto(
+                id = index,
+                bias1 = biasResNewDto(devtiMap[biasResult.bias.single()]!!, biasResult.weight!!),
+                bias2 = biasResNewDto(
+                    devtiMap[pillar.replace(biasResult.bias, "").single()]!!,
+                    100 - biasResult.weight!!
+                ),
+                pillarTitle = pillarTitleMap[pillar]!!,
+                biasTitle = biasResult.biasTitle,
+                reviewList = biasResult.reviewList
+            )
+            testList.add(dto)
+
+            index++;
+        }
+        return testList
+    }
 
     fun createDevti(
         answer: Answer,
