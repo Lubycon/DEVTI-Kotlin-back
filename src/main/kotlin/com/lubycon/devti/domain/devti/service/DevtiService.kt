@@ -69,13 +69,12 @@ class DevtiService(
     }
 
     fun analysisAndCreateDevti(answerAttributeList: List<AnswerAttribute>): DevtiReqDto {
-
-        val answer = answerService.createAnswer(answerAttributeList)
-        val biasResult: HashMap<BiasType, Int> = devtiAnalysisService.analysisAnswer(answerAttributeList)
+        val answerSorted = answerAttributeList.sortedBy { it.id }
+        val answer = answerService.createAnswer(answerSorted)
+        val biasResult: HashMap<BiasType, Int> = devtiAnalysisService.analysisAnswer(answerSorted)
         val winBiasResult: HashMap<BiasType, Int> = devtiAnalysisService.classifyDevtiByPillar(biasResult)
-        //job
-        val job: String = if (answerAttributeList.get(33).sequence == 0L) DESIRED_JOB_F else DESIRED_JOB_B
-
+        val job: String =
+            if (answerSorted.get(32).sequence == 0L) DESIRED_JOB_F else DESIRED_JOB_B
         createDevti(answer, winBiasResult, biasResult)
 
         return DevtiReqDto(job = job, result = biasResult)
@@ -125,7 +124,6 @@ class DevtiService(
         return GeneralReviewDto(
             result = devti,
             title = review.headline,
-            job = job,
             content = content.toString(),
             summaryReview = summaryList
         )
