@@ -2,7 +2,7 @@ package com.lubycon.devti.domain.devti.api
 
 import com.lubycon.devti.domain.answer.entity.AnswerAttribute
 import com.lubycon.devti.domain.devti.dto.request.DevtiReqDto
-import com.lubycon.devti.domain.devti.dto.response.mogako.DevtiResDto3
+import com.lubycon.devti.domain.devti.dto.response.mogako.DevtiResDto
 import com.lubycon.devti.domain.devti.service.DevtiService
 import com.lubycon.devti.global.code.BiasType
 import io.swagger.annotations.Api
@@ -37,7 +37,7 @@ class DevtiController(
         @RequestParam("W") w: Int,
         @RequestParam("L") l: Int,
         @RequestParam("job") job: String
-    ): ResponseEntity<DevtiResDto3> {
+    ): ResponseEntity<DevtiResDto> {
         val biasResult: HashMap<BiasType, Int> = HashMap<BiasType, Int>()
         biasResult.put(BiasType.V, v);
         biasResult.put(BiasType.A, a);

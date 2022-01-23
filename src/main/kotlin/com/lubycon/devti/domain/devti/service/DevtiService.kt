@@ -125,6 +125,7 @@ class DevtiService(
         return GeneralReviewDto(
             result = devti,
             title = review.headline,
+            job = job,
             content = content.toString(),
             summaryReview = summaryList
         )
