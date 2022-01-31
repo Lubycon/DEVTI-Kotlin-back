@@ -112,9 +112,11 @@ class DevtiService(
     fun getGeneralReview(devti: String, job: String): GeneralReviewDto {
 
         val review: Review = reviewService.findByReviewType(devti).get(0)
-        val getAV = reviewService.findByReviewType(devti[0].toString() + job).first().contents
-        val getPT = reviewService.findByReviewType(devti[1].toString()).first().contents
-        val summaryList = listOf<String>(getAV, getPT)
+        val getAV = reviewService.findByReviewType(devti[0].toString() + job).first()
+        val getPT = reviewService.findByReviewType(devti[1].toString()).first()
+        logger.info { "getAv : " + reviewService.findByReviewType(devti[0].toString() + job).first() }
+        logger.info { "getPT : " + getPT }
+        val summaryList = listOf(ResultResDto(getAV.emoji, getAV.contents), ResultResDto(getPT.emoji, getAV.contents))
 
         val content = StringBuilder()
 

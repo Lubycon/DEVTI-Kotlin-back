@@ -4,5 +4,5 @@ data class GeneralReviewDto(
     val result: String,
     val title: String,
     val summary: String,
-    val summaryList: List<String>
+    val summaryList: List<ResultResDto>
 )
