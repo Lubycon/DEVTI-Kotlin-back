@@ -77,6 +77,10 @@ class DevtiService(
             if (answerSorted.get(32).sequence == 0L) DESIRED_JOB_F else DESIRED_JOB_B
         createDevti(answer, winBiasResult, biasResult)
 
+//        val result: MutableMap<BiasType, String> = mutableMapOf()
+//        biasResult.mapValues { it.value.toString() }.map { result.put(it.key, it.value) }
+//        result.put(BiasType.J, job)
+
         return DevtiReqDto(job = job, result = biasResult)
     }
 
@@ -124,8 +128,8 @@ class DevtiService(
         return GeneralReviewDto(
             result = devti,
             title = review.headline,
-            content = content.toString(),
-            summaryReview = summaryList
+            summary = content.toString(),
+            summaryList = summaryList
         )
 
     }

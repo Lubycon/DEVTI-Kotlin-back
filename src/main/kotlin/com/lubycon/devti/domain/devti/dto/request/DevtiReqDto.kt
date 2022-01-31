@@ -1,14 +1,24 @@
 package com.lubycon.devti.domain.devti.dto.request
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonTypeInfo
+import com.fasterxml.jackson.annotation.JsonTypeName
 import com.lubycon.devti.global.code.BiasType
 import io.swagger.annotations.ApiModelProperty
 
+
+@JsonTypeName(value = "result")
+@JsonTypeInfo(include = JsonTypeInfo.As.WRAPPER_OBJECT, use = JsonTypeInfo.Id.NAME)
 data class DevtiReqDto(
 
     @ApiModelProperty(value = "희망 직무 (F,B)", example = "F")
     val job: String,
 
     @ApiModelProperty(value = "DEVTI 결과 HashMap String", example = "{W=90, A=60, P=60, V=35, T=40, S=75, L=0, C=15}")
-    val result: HashMap<BiasType, Int>
-
-)
+    private val result: MutableMap<BiasType, Int>
+) {
+    @JsonAnyGetter
+    fun getProperties(): Map<BiasType, Int> {
+        return result
+    }
+}
