@@ -1,6 +1,5 @@
 package com.lubycon.devti.domain.devti.service
 
-import com.lubycon.devti.domain.advertisement.service.AdvertisementService
 import com.lubycon.devti.domain.answer.entity.Answer
 import com.lubycon.devti.domain.answer.entity.AnswerAttribute
 import com.lubycon.devti.domain.answer.service.AnswerService
@@ -33,7 +32,6 @@ class DevtiService(
     private val answerService: AnswerService,
     private val devtiRepository: DevtiRepository,
     private val devtiAnalysisService: DevtiAnalysisService,
-    private val advertisementService: AdvertisementService,
     private val biasService: BiasService,
     private val reviewService: ReviewService
 ) {
@@ -93,7 +91,6 @@ class DevtiService(
 
         val job = job2.toString()
 
-
         val winBiasResult: LinkedHashMap<BiasType, Int> = devtiAnalysisService.classifyDevtiByPillar(biasResult)
 
         logger.info { "winBias : " + winBiasResult.toString() }
@@ -112,7 +109,7 @@ class DevtiService(
         return DevtiResDto(
             generalReview = getGeneralReview(devtiString, job),
             biasResults = getBiasResults(devtiString, biasResult, reviewTypeMap),
-            advertisementList = advertisementService.findAll(),
+//            advertisementList = advertisementService.findAll(),
             devtiRatioList = getDevtiRatio()
         )
     }
