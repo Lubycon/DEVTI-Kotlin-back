@@ -31,11 +31,10 @@ class Preset(
 
     @Column(name = "weight")
     private val weight: Float
-): BaseTimeEntity() {
+) : BaseTimeEntity() {
 
-    fun toResDto(): PresetResDto{
+    fun toResDto(): PresetResDto {
         return PresetResDto(
-            key = sequence,
             bias = bias,
             weight = weight,
             sequence = sequence,

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service
 class BiasService(
     private val biasRepository: BiasRepository
 ) {
-     fun findBiasListByBiasIsNotIn(biasType: List<BiasType>): List<Bias>
-        = biasRepository.findAllByBiasIsNotIn(biasType)
+    fun findBiasListByBiasIsNotIn(biasType: List<BiasType>): List<Bias> = biasRepository.findAllByBiasIsNotIn(biasType)
+
+    fun findKrBiasByBias(bias: String): String = biasRepository.findKrBiasByBias(bias)
 }
