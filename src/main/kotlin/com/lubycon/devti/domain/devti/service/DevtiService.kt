@@ -116,7 +116,7 @@ class DevtiService(
         val getPT = reviewService.findByReviewType(devti[1].toString()).first()
         logger.info { "getAv : " + reviewService.findByReviewType(devti[0].toString() + job).first() }
         logger.info { "getPT : " + getPT }
-        val summaryList = listOf(ResultResDto(getAV.emoji, getAV.contents), ResultResDto(getPT.emoji, getAV.contents))
+        val summaryList = listOf(ResultResDto(getAV.emoji, getAV.contents), ResultResDto(getPT.emoji, getPT.contents))
 
         val content = StringBuilder()
 
