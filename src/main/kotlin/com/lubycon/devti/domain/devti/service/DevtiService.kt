@@ -14,6 +14,8 @@ import com.lubycon.devti.domain.devti.dto.response.mogako.DevtiBiasResDto
 import com.lubycon.devti.domain.devti.dto.response.mogako.DevtiResDto
 import com.lubycon.devti.domain.devti.dto.response.mogako.biasResNewDto
 import com.lubycon.devti.domain.devti.entity.Devti
+import com.lubycon.devti.domain.new_advertisement.entity.enum.Career
+import com.lubycon.devti.domain.new_advertisement.entity.enum.Job
 import com.lubycon.devti.domain.review.dto.response.GeneralReviewDto
 import com.lubycon.devti.domain.review.dto.response.ResultResDto
 import com.lubycon.devti.domain.review.entity.Review
@@ -73,18 +75,24 @@ class DevtiService(
         val answer = answerService.createAnswer(answerSorted)
         val biasResult: HashMap<BiasType, Int> = devtiAnalysisService.analysisAnswer(answerSorted)
         val winBiasResult: HashMap<BiasType, Int> = devtiAnalysisService.classifyDevtiByPillar(biasResult)
+
         val job: String =
             if (answerSorted.get(32).sequence == 0L) DESIRED_JOB_F else DESIRED_JOB_B
+        val career: Career = Career.FindCareerByValue.fromValue(answerSorted.get(33).sequence.toInt())!!
+
         createDevti(answer, winBiasResult, biasResult)
 
-//        val result: MutableMap<BiasType, String> = mutableMapOf()
-//        biasResult.mapValues { it.value.toString() }.map { result.put(it.key, it.value) }
-//        result.put(BiasType.J, job)
+        val result: MutableMap<BiasType, String> = mutableMapOf()
+        biasResult.mapValues { it.value.toString() }.map { result.put(it.key, it.value) }
+        result.put(BiasType.J, job)
 
-        return DevtiReqDto(job = job, result = biasResult)
+        return DevtiReqDto(job = job, result = biasResult, career = career)
     }
 
-    fun getDevtiByAnswer(biasResult: HashMap<BiasType, Int>, job: String): DevtiResDto {
+    fun getDevtiByAnswer(biasResult: HashMap<BiasType, Int>, job2: Job): DevtiResDto {
+
+        val job = job2.toString()
+
 
         val winBiasResult: LinkedHashMap<BiasType, Int> = devtiAnalysisService.classifyDevtiByPillar(biasResult)
 

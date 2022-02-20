@@ -4,6 +4,8 @@ import com.lubycon.devti.domain.answer.entity.AnswerAttribute
 import com.lubycon.devti.domain.devti.dto.request.DevtiReqDto
 import com.lubycon.devti.domain.devti.dto.response.mogako.DevtiResDto
 import com.lubycon.devti.domain.devti.service.DevtiService
+import com.lubycon.devti.domain.new_advertisement.entity.enum.Career
+import com.lubycon.devti.domain.new_advertisement.entity.enum.Job
 import com.lubycon.devti.global.code.BiasType
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
@@ -36,7 +38,8 @@ class DevtiController(
         @RequestParam("T") t: Int,
         @RequestParam("W") w: Int,
         @RequestParam("L") l: Int,
-        @RequestParam("job") job: String
+        @RequestParam("job") job: Job,
+        @RequestParam("career") career: Career,
     ): ResponseEntity<DevtiResDto> {
         val biasResult: HashMap<BiasType, Int> = HashMap<BiasType, Int>()
         biasResult.put(BiasType.V, v);
